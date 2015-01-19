@@ -1,7 +1,7 @@
 # OBJ-Solidizer-And-Voxelizer
 Voxelizes OBJ geometry (vertices and faces) by interpreting it as a boundary of solid geometry.
 
-Makes use syoyo's tinyobjloader for opening OBJ files: https://github.com/syoyo/tinyobjloader
+Makes use of syoyo's tinyobjloader for opening OBJ files: https://github.com/syoyo/tinyobjloader
 
 Current status: infinitely deep alpha. Doesn't actually do what it's supposed to do (yet).
 
