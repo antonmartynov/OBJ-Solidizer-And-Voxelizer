@@ -31,6 +31,15 @@ __published:	// IDE-managed Components
 	TProgressBar *ProgressBarResaveFileCurrentOperation;
 	TLabel *LabelResaveFileOverallProgress;
 	TProgressBar *ProgressBarResaveFileOverallProgress;
+	TGroupBox *GroupBox1;
+	TLabel *LabelOBJInformationAmountOfVertices;
+	TLabel *LabelOBJInformationAmountOfFaces;
+	TLabel *LabelOBJInformationXMin;
+	TLabel *LabelOBJInformationXMax;
+	TLabel *LabelOBJInformationYMin;
+	TLabel *LabelOBJInformationYMax;
+	TLabel *LabelOBJInformationZMin;
+	TLabel *LabelOBJInformationZMax;
 	void __fastcall ButtonLoadFileClick(TObject *Sender);
 	void __fastcall TimerTrackLoadFileOperationStatusTimer(TObject *Sender);
 	void __fastcall TimerTrackResaveFileOperationStatusTimer(TObject *Sender);

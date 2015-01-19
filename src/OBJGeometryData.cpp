@@ -40,19 +40,19 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 		loadFileStatus.currentOperationProgress = 0.5f;
 		loadFileStatus.overallProgress = 0.0f;
 
-		int totalVerticesCount = 0;
+		spatialInformation.verticesCount = 0;
 		for(size_t s = 0; s < shapes.size(); ++s)
 		{
-			totalVerticesCount += shapes[s].mesh.positions.size() / 3;
+			spatialInformation.verticesCount += shapes[s].mesh.positions.size() / 3;
 		}
-		vertices = new OneDimensionalArray<Vertex>(totalVerticesCount);
+		vertices = new OneDimensionalArray<Vertex>(spatialInformation.verticesCount);
 
-		int totalFacesCount = 0;
+		spatialInformation.facesCount = 0;
 		for(size_t s = 0; s < shapes.size(); ++s)
 		{
-			totalFacesCount += shapes[s].mesh.indices.size() / 3;
+			spatialInformation.facesCount += shapes[s].mesh.indices.size() / 3;
 		}
-		faces = new OneDimensionalArray<Face>(totalFacesCount);
+		faces = new OneDimensionalArray<Face>(spatialInformation.facesCount);
 
 		loadFileStatus.currentOperationName = "Parsing vertices...";
 		loadFileStatus.currentOperationProgress = 0.0f;
@@ -76,8 +76,8 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 				vertices->getElement(verticesIndexOffset + v)->z =
 				shapes[s].mesh.positions[v * 3 + 2];
 
-				loadFileStatus.currentOperationProgress += 1.0f / totalVerticesCount;
-				loadFileStatus.overallProgress += 1.0f / (totalVerticesCount + totalFacesCount);
+				loadFileStatus.currentOperationProgress += 1.0f / spatialInformation.verticesCount;
+				loadFileStatus.overallProgress += 1.0f / (2 * spatialInformation.verticesCount + spatialInformation.facesCount);
 			}
 		}
 
@@ -101,13 +101,55 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 				faces->getElement(facesIndexOffset + i)->v2 = verticesIndexOffset + shapes[s].mesh.indices[i * 3 + 1];
 				faces->getElement(facesIndexOffset + i)->v3 = verticesIndexOffset + shapes[s].mesh.indices[i * 3 + 2];
 
-				loadFileStatus.currentOperationProgress += 1.0f / totalFacesCount;
-				loadFileStatus.overallProgress += 1.0f / (totalVerticesCount + totalFacesCount);
+				loadFileStatus.currentOperationProgress += 1.0f / spatialInformation.facesCount;
+				loadFileStatus.overallProgress += 1.0f / (2 * spatialInformation.verticesCount + spatialInformation.facesCount);
 			}
 		}
+
+		loadFileStatus.currentOperationName = "Computing the bounding box...";
+		loadFileStatus.currentOperationProgress = 0.0f;
+
+		spatialInformation.xMin = FLT_MAX;
+		spatialInformation.xMax = FLT_MIN;
+		spatialInformation.yMin = FLT_MAX;
+		spatialInformation.yMax = FLT_MIN;
+		spatialInformation.zMin = FLT_MAX;
+		spatialInformation.zMax = FLT_MIN;
+
+		for(int v = 0; v < spatialInformation.verticesCount; ++v)
+		{
+			if(vertices->getElement(v)->x < spatialInformation.xMin)
+			{
+				spatialInformation.xMin = vertices->getElement(v)->x;
+			}
+			if(vertices->getElement(v)->x > spatialInformation.xMax)
+			{
+				spatialInformation.xMax = vertices->getElement(v)->x;
+			}
+			if(vertices->getElement(v)->y < spatialInformation.yMin)
+			{
+				spatialInformation.yMin = vertices->getElement(v)->y;
+			}
+			if(vertices->getElement(v)->y > spatialInformation.yMax)
+			{
+				spatialInformation.yMax = vertices->getElement(v)->y;
+			}
+			if(vertices->getElement(v)->z < spatialInformation.zMin)
+			{
+				spatialInformation.zMin = vertices->getElement(v)->z;
+			}
+			if(vertices->getElement(v)->z > spatialInformation.zMax)
+			{
+				spatialInformation.zMax = vertices->getElement(v)->z;
+			}
+
+			loadFileStatus.currentOperationProgress += 1.0f / spatialInformation.verticesCount;
+				loadFileStatus.overallProgress += 1.0f / (2 * spatialInformation.verticesCount + spatialInformation.facesCount);
+        }
+
+		loadFileStatus.currentOperationName = "Done!";
+		loadFileStatus.status = 1;
 	}
-	loadFileStatus.currentOperationName = "Done!";
-	loadFileStatus.status = 1;
 }
 
 void OBJGeometryData::saveFile(UnicodeString OBJFilename)

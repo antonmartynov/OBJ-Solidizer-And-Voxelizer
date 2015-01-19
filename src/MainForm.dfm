@@ -6,7 +6,7 @@ object Form1: TForm1
   Caption = 
     'OBJ Solidizer And Voxelizer v0 - https://github.com/antonmartyno' +
     'v/OBJ-Solidizer-And-Voxelizer'
-  ClientHeight = 360
+  ClientHeight = 504
   ClientWidth = 480
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -84,7 +84,7 @@ object Form1: TForm1
   end
   object GroupBoxResaveOBJFile: TGroupBox
     Left = 8
-    Top = 184
+    Top = 328
     Width = 465
     Height = 169
     Caption = 'Re-save the loaded OBJ file'
@@ -145,12 +145,84 @@ object Form1: TForm1
       TabOrder = 3
     end
   end
+  object GroupBox1: TGroupBox
+    Left = 8
+    Top = 184
+    Width = 465
+    Height = 137
+    Caption = 'OBJ geometry information'
+    TabOrder = 2
+    object LabelOBJInformationAmountOfVertices: TLabel
+      Left = 16
+      Top = 24
+      Width = 209
+      Height = 17
+      AutoSize = False
+      Caption = 'Amount of vertices:'
+    end
+    object LabelOBJInformationAmountOfFaces: TLabel
+      Left = 16
+      Top = 40
+      Width = 209
+      Height = 17
+      AutoSize = False
+      Caption = 'Amount of triangles:'
+    end
+    object LabelOBJInformationXMin: TLabel
+      Left = 240
+      Top = 24
+      Width = 209
+      Height = 17
+      AutoSize = False
+      Caption = 'X min:'
+    end
+    object LabelOBJInformationXMax: TLabel
+      Left = 240
+      Top = 40
+      Width = 209
+      Height = 17
+      AutoSize = False
+      Caption = 'X max:'
+    end
+    object LabelOBJInformationYMin: TLabel
+      Left = 240
+      Top = 56
+      Width = 209
+      Height = 17
+      AutoSize = False
+      Caption = 'Y min:'
+    end
+    object LabelOBJInformationYMax: TLabel
+      Left = 240
+      Top = 72
+      Width = 209
+      Height = 17
+      AutoSize = False
+      Caption = 'Y max:'
+    end
+    object LabelOBJInformationZMin: TLabel
+      Left = 240
+      Top = 88
+      Width = 209
+      Height = 17
+      AutoSize = False
+      Caption = 'Z min:'
+    end
+    object LabelOBJInformationZMax: TLabel
+      Left = 240
+      Top = 104
+      Width = 209
+      Height = 17
+      AutoSize = False
+      Caption = 'Z max:'
+    end
+  end
   object TimerTrackResaveFileOperationStatus: TTimer
     Enabled = False
     Interval = 16
     OnTimer = TimerTrackResaveFileOperationStatusTimer
-    Left = 312
-    Top = 264
+    Left = 296
+    Top = 384
   end
   object TimerTrackLoadFileOperationStatus: TTimer
     Enabled = False

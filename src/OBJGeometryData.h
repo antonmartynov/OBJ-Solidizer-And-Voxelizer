@@ -6,6 +6,7 @@
 #include "OneDimensionalArray.h"
 #include "FileIO.h"
 #include "tiny_obj_loader.h"
+#include "float.h"
 
 /*
 Issues / TODO:
@@ -22,6 +23,18 @@ struct operationStatus
 	int status; // 0 - in progress, 1 - finished, 2 - error (currentOperationName has description)
 };
 
+struct OBJInformation
+{
+	int verticesCount;
+	int facesCount;
+	float xMin;
+	float xMax;
+	float yMin;
+	float yMax;
+	float zMin;
+	float zMax;
+};
+
 class OBJGeometryData
 {
 public:
@@ -33,9 +46,7 @@ public:
 	operationStatus loadFileStatus;
 	void saveFile(UnicodeString OBJFilename);
 	operationStatus saveFileStatus;
-
-	//friend DWORD WINAPI loadFileWrapper(LPVOID lpParameter);
-	//friend DWORD WINAPI saveFileWrapper(LPVOID lpParameter);
+	OBJInformation spatialInformation;
 
 private:
 
