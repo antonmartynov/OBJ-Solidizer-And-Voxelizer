@@ -20,40 +20,40 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 	engine->initialize();
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::Button1Click(TObject *Sender)
+void __fastcall TForm1::ButtonLoadFileClick(TObject *Sender)
 {
-	engine->loadFile(Form1->Edit1->Text);
-    Form1->Timer1->Enabled = true;
+	engine->loadFile(Form1->EditInputOBJFile->Text);
+	Form1->TimerTrackLoadFileOperationStatus->Enabled = true;
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::Button2Click(TObject *Sender)
+void __fastcall TForm1::TimerTrackLoadFileOperationStatusTimer(TObject *Sender)
 {
-	engine->saveFile(Form1->Edit2->Text);
-	Form1->Timer2->Enabled = true;
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TForm1::Timer1Timer(TObject *Sender)
-{
-	Form1->Memo1->Clear();
-	Form1-Memo1->Lines->Add(engine->geometryData->loadFileStatus.currentOperationName + ": " +
-							UnicodeString(engine->geometryData->loadFileStatus.currentOperationProgress * 100.0f) + "%");
+	Form1->LabelOpenFileCurrentOperation->Caption = "Current operation: " + engine->geometryData->loadFileStatus.currentOperationName;
+	Form1->ProgressBarOpenFileCurrentOperation->Position = (int)(engine->geometryData->loadFileStatus.currentOperationProgress * 100.0f);
+	Form1->ProgressBarOpenFileOverallProgress->Position = (int)(engine->geometryData->loadFileStatus.overallProgress * 100.0f);
 	if(engine->geometryData->loadFileStatus.status == 1)
 	{
-		Form1->Timer1->Enabled = false;
+		Form1->TimerTrackLoadFileOperationStatus->Enabled = false;
 	}
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::Timer2Timer(TObject *Sender)
+void __fastcall TForm1::ButtonResaveFileClick(TObject *Sender)
 {
-	Form1->Memo1->Clear();
-	Form1-Memo1->Lines->Add(engine->geometryData->saveFileStatus.currentOperationName + ": " +
-							UnicodeString(engine->geometryData->saveFileStatus.currentOperationProgress * 100.0f) + "%");
+	engine->saveFile(Form1->EditResavedOBJFile->Text);
+	Form1->TimerTrackResaveFileOperationStatus->Enabled = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::TimerTrackResaveFileOperationStatusTimer(TObject *Sender)
+{
+	Form1->LabelResaveFileCurrentOperation->Caption = "Current operation: " + engine->geometryData->saveFileStatus.currentOperationName;
+	Form1->ProgressBarResaveFileCurrentOperation->Position = (int)(engine->geometryData->saveFileStatus.currentOperationProgress * 100.0f);
+	Form1->ProgressBarResaveFileOverallProgress->Position = (int)(engine->geometryData->saveFileStatus.overallProgress * 100.0f);
 	if(engine->geometryData->saveFileStatus.status == 1)
 	{
-		Form1->Timer2->Enabled = false;
+		Form1->TimerTrackResaveFileOperationStatus->Enabled = false;
 	}
 }
 //---------------------------------------------------------------------------

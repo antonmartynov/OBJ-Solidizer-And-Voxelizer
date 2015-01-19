@@ -17,6 +17,7 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 
 	loadFileStatus.currentOperationName = "Loading the file using Tiny OBJ Loader...";
 	loadFileStatus.currentOperationProgress = 0.5f;
+	loadFileStatus.overallProgress = 0.0f;
 	loadFileStatus.status = 0;
 
 	// Switching to the standard C locale for numerals (you'll be surprised
@@ -30,18 +31,32 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 	{
 		loadFileStatus.currentOperationName = "ERROR! Tiny OBJ Loader's message: " + UnicodeString(error.c_str());
 		loadFileStatus.currentOperationProgress = 0.0f;
+		loadFileStatus.overallProgress = 0.0f;
 		loadFileStatus.status = 2;
 	}
 	else
 	{
-		loadFileStatus.currentOperationName = "Parsing vertices...";
-		loadFileStatus.currentOperationProgress = 0.0f;
+		loadFileStatus.currentOperationName = "Counting vertices and indices...";
+		loadFileStatus.currentOperationProgress = 0.5f;
+		loadFileStatus.overallProgress = 0.0f;
+
 		int totalVerticesCount = 0;
 		for(size_t s = 0; s < shapes.size(); ++s)
 		{
 			totalVerticesCount += shapes[s].mesh.positions.size() / 3;
 		}
 		vertices = new OneDimensionalArray<Vertex>(totalVerticesCount);
+
+		int totalFacesCount = 0;
+		for(size_t s = 0; s < shapes.size(); ++s)
+		{
+			totalFacesCount += shapes[s].mesh.indices.size() / 3;
+		}
+		faces = new OneDimensionalArray<Face>(totalFacesCount);
+
+		loadFileStatus.currentOperationName = "Parsing vertices...";
+		loadFileStatus.currentOperationProgress = 0.0f;
+		loadFileStatus.overallProgress = 0.0f;
 
 		for(size_t s = 0; s < shapes.size(); ++s)
 		{
@@ -62,19 +77,12 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 				shapes[s].mesh.positions[v * 3 + 2];
 
 				loadFileStatus.currentOperationProgress += 1.0f / totalVerticesCount;
+				loadFileStatus.overallProgress += 1.0f / (totalVerticesCount + totalFacesCount);
 			}
 		}
 
-		loadFileStatus.currentOperationName = "Found " + UnicodeString(totalVerticesCount) + " vertices.";
-
 		loadFileStatus.currentOperationName = "Parsing faces...";
 		loadFileStatus.currentOperationProgress = 0.0f;
-		int totalFacesCount = 0;
-		for(size_t s = 0; s < shapes.size(); ++s)
-		{
-			totalFacesCount += shapes[s].mesh.indices.size() / 3;
-		}
-		faces = new OneDimensionalArray<Face>(totalFacesCount);
 
 		for(size_t s = 0; s < shapes.size(); ++s)
 		{
@@ -94,20 +102,12 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 				faces->getElement(facesIndexOffset + i)->v3 = verticesIndexOffset + shapes[s].mesh.indices[i * 3 + 2];
 
 				loadFileStatus.currentOperationProgress += 1.0f / totalFacesCount;
-            }
+				loadFileStatus.overallProgress += 1.0f / (totalVerticesCount + totalFacesCount);
+			}
 		}
-
-		loadFileStatus.currentOperationName = "Found " + UnicodeString(totalFacesCount) + " faces.";
-
-    }
+	}
+	loadFileStatus.currentOperationName = "Done!";
 	loadFileStatus.status = 1;
-}
-
-DWORD WINAPI loadFileWrapper(LPVOID lpParameter)
-{
-	PtrAndString * ptrAndString = (PtrAndString *)lpParameter;
-	ptrAndString->objGeometryData->loadFile(ptrAndString->filenameString);
-	return 0;
 }
 
 void OBJGeometryData::saveFile(UnicodeString OBJFilename)
@@ -123,6 +123,7 @@ void OBJGeometryData::saveFile(UnicodeString OBJFilename)
 
 	saveFileStatus.currentOperationName = "Writing vertices information...";
 	saveFileStatus.currentOperationProgress = 0.0f;
+	saveFileStatus.overallProgress = 0.0f;
 	saveFileStatus.status = 0;
 	for(int v = 0; v < vertices->getCount(); ++v)
 	{
@@ -130,6 +131,7 @@ void OBJGeometryData::saveFile(UnicodeString OBJFilename)
 											 UnicodeString(vertices->getElement(v)->y) + " " +
 											 UnicodeString(vertices->getElement(v)->z) + lineBreak;
 		saveFileStatus.currentOperationProgress += 1.0f / vertices->getCount();
+		saveFileStatus.overallProgress += 1.0f / (vertices->getCount() + faces->getCount());
 	}
 
 	saveFileStatus.currentOperationName = "Writing indices information...";
@@ -141,17 +143,19 @@ void OBJGeometryData::saveFile(UnicodeString OBJFilename)
 											 UnicodeString(faces->getElement(f)->v2 + 1) + " " +
 											 UnicodeString(faces->getElement(f)->v3 + 1) + lineBreak;
 		saveFileStatus.currentOperationProgress += 1.0f / faces->getCount();
+		saveFileStatus.overallProgress += 1.0f / (vertices->getCount() + faces->getCount());
 	}
 
 	// Switching back to system default locale for numerals
 	setlocale(LC_NUMERIC, "");
 
-	fileio::writeFile(OBJFilename, outputString);
-}
+	saveFileStatus.currentOperationName = "Writing the OBJ contents to file...";
+	saveFileStatus.currentOperationProgress = 0.5f;
 
-DWORD WINAPI saveFileWrapper(LPVOID lpParameter)
-{
-	PtrAndString * ptrAndString = (PtrAndString *)lpParameter;
-	ptrAndString->objGeometryData->saveFile(ptrAndString->filenameString);
-	return 0;
+	fileio::writeFile(OBJFilename, outputString);
+
+	saveFileStatus.currentOperationProgress = 1.0f;
+
+	saveFileStatus.currentOperationName = "Done!";
+	saveFileStatus.status = 1;
 }

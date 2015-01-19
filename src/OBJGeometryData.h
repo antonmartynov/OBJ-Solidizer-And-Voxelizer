@@ -18,6 +18,7 @@ struct operationStatus
 {
 	UnicodeString currentOperationName;
 	float currentOperationProgress;
+	float overallProgress;
 	int status; // 0 - in progress, 1 - finished, 2 - error (currentOperationName has description)
 };
 
@@ -33,8 +34,8 @@ public:
 	void saveFile(UnicodeString OBJFilename);
 	operationStatus saveFileStatus;
 
-	friend DWORD WINAPI loadFileWrapper(LPVOID lpParameter);
-	friend DWORD WINAPI saveFileWrapper(LPVOID lpParameter);
+	//friend DWORD WINAPI loadFileWrapper(LPVOID lpParameter);
+	//friend DWORD WINAPI saveFileWrapper(LPVOID lpParameter);
 
 private:
 

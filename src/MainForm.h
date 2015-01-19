@@ -8,21 +8,33 @@
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
+#include <ComCtrls.hpp>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
-	TButton *Button1;
-	TEdit *Edit1;
-	TMemo *Memo1;
-	TButton *Button2;
-	TEdit *Edit2;
-	TTimer *Timer1;
-	TTimer *Timer2;
-	void __fastcall Button1Click(TObject *Sender);
-	void __fastcall Button2Click(TObject *Sender);
-	void __fastcall Timer1Timer(TObject *Sender);
-	void __fastcall Timer2Timer(TObject *Sender);
+	TTimer *TimerTrackResaveFileOperationStatus;
+	TGroupBox *GroupBoxLoadOBJFile;
+	TButton *ButtonLoadFile;
+	TEdit *EditInputOBJFile;
+	TLabel *LabelInputOBJFile;
+	TLabel *LabelOpenFileCurrentOperation;
+	TProgressBar *ProgressBarOpenFileCurrentOperation;
+	TLabel *LabelOpenFileOverallProgress;
+	TProgressBar *ProgressBarOpenFileOverallProgress;
+	TTimer *TimerTrackLoadFileOperationStatus;
+	TGroupBox *GroupBoxResaveOBJFile;
+	TLabel *LabelResavedOBJFile;
+	TEdit *EditResavedOBJFile;
+	TButton *ButtonResaveFile;
+	TLabel *LabelResaveFileCurrentOperation;
+	TProgressBar *ProgressBarResaveFileCurrentOperation;
+	TLabel *LabelResaveFileOverallProgress;
+	TProgressBar *ProgressBarResaveFileOverallProgress;
+	void __fastcall ButtonLoadFileClick(TObject *Sender);
+	void __fastcall TimerTrackLoadFileOperationStatusTimer(TObject *Sender);
+	void __fastcall TimerTrackResaveFileOperationStatusTimer(TObject *Sender);
+	void __fastcall ButtonResaveFileClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);

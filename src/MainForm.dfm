@@ -3,7 +3,9 @@ object Form1: TForm1
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'OBJ Solidizer And Voxelizer v0'
+  Caption = 
+    'OBJ Solidizer And Voxelizer v0 - https://github.com/antonmartyno' +
+    'v/OBJ-Solidizer-And-Voxelizer'
   ClientHeight = 360
   ClientWidth = 480
   Color = clBtnFace
@@ -16,61 +18,145 @@ object Form1: TForm1
   Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
-  object Button1: TButton
+  object GroupBoxLoadOBJFile: TGroupBox
     Left = 8
     Top = 8
-    Width = 97
-    Height = 25
-    Caption = 'Load this file'
+    Width = 465
+    Height = 169
+    Caption = 'Load an OBJ file'
     TabOrder = 0
-    OnClick = Button1Click
+    object LabelInputOBJFile: TLabel
+      Left = 16
+      Top = 24
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = 'Filename:'
+    end
+    object LabelOpenFileCurrentOperation: TLabel
+      Left = 16
+      Top = 56
+      Width = 433
+      Height = 17
+      AutoSize = False
+      Caption = 'Current operation:'
+    end
+    object LabelOpenFileOverallProgress: TLabel
+      Left = 16
+      Top = 112
+      Width = 433
+      Height = 17
+      AutoSize = False
+      Caption = 'Overall progress:'
+    end
+    object ButtonLoadFile: TButton
+      Left = 352
+      Top = 24
+      Width = 97
+      Height = 25
+      Caption = 'Load this file'
+      TabOrder = 0
+      OnClick = ButtonLoadFileClick
+    end
+    object EditInputOBJFile: TEdit
+      Left = 80
+      Top = 24
+      Width = 265
+      Height = 21
+      TabOrder = 1
+      Text = 'P:\justcube.obj'
+    end
+    object ProgressBarOpenFileCurrentOperation: TProgressBar
+      Left = 16
+      Top = 80
+      Width = 433
+      Height = 17
+      Step = 1
+      TabOrder = 2
+    end
+    object ProgressBarOpenFileOverallProgress: TProgressBar
+      Left = 16
+      Top = 136
+      Width = 433
+      Height = 17
+      TabOrder = 3
+    end
   end
-  object Edit1: TEdit
-    Left = 112
-    Top = 8
-    Width = 145
-    Height = 21
+  object GroupBoxResaveOBJFile: TGroupBox
+    Left = 8
+    Top = 184
+    Width = 465
+    Height = 169
+    Caption = 'Re-save the loaded OBJ file'
     TabOrder = 1
-    Text = 'P:\justcube.obj'
+    object LabelResavedOBJFile: TLabel
+      Left = 16
+      Top = 24
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = 'Filename:'
+    end
+    object LabelResaveFileCurrentOperation: TLabel
+      Left = 16
+      Top = 56
+      Width = 433
+      Height = 17
+      AutoSize = False
+      Caption = 'Current operation:'
+    end
+    object LabelResaveFileOverallProgress: TLabel
+      Left = 16
+      Top = 112
+      Width = 433
+      Height = 17
+      AutoSize = False
+      Caption = 'Overall progress:'
+    end
+    object EditResavedOBJFile: TEdit
+      Left = 80
+      Top = 24
+      Width = 265
+      Height = 21
+      TabOrder = 0
+      Text = 'P:\resaved.obj'
+    end
+    object ButtonResaveFile: TButton
+      Left = 352
+      Top = 24
+      Width = 97
+      Height = 25
+      Caption = 'Re-save here'
+      TabOrder = 1
+      OnClick = ButtonResaveFileClick
+    end
+    object ProgressBarResaveFileCurrentOperation: TProgressBar
+      Left = 16
+      Top = 80
+      Width = 433
+      Height = 17
+      TabOrder = 2
+    end
+    object ProgressBarResaveFileOverallProgress: TProgressBar
+      Left = 16
+      Top = 136
+      Width = 433
+      Height = 17
+      TabOrder = 3
+    end
   end
-  object Memo1: TMemo
-    Left = 16
-    Top = 40
-    Width = 201
-    Height = 177
-    Lines.Strings = (
-      'Memo1')
-    TabOrder = 2
-  end
-  object Button2: TButton
-    Left = 264
-    Top = 8
-    Width = 81
-    Height = 25
-    Caption = 'Re-save here'
-    TabOrder = 3
-    OnClick = Button2Click
-  end
-  object Edit2: TEdit
-    Left = 352
-    Top = 8
-    Width = 121
-    Height = 21
-    TabOrder = 4
-    Text = 'P:\resaved.obj'
-  end
-  object Timer1: TTimer
+  object TimerTrackResaveFileOperationStatus: TTimer
     Enabled = False
     Interval = 16
-    OnTimer = Timer1Timer
-    Left = 224
-    Top = 72
+    OnTimer = TimerTrackResaveFileOperationStatusTimer
+    Left = 312
+    Top = 264
   end
-  object Timer2: TTimer
+  object TimerTrackLoadFileOperationStatus: TTimer
     Enabled = False
     Interval = 16
-    OnTimer = Timer2Timer
-    Left = 368
-    Top = 72
+    OnTimer = TimerTrackLoadFileOperationStatusTimer
+    Left = 312
+    Top = 88
   end
 end
