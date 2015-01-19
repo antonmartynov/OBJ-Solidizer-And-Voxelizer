@@ -41,7 +41,7 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 		{
 			totalVerticesCount += shapes[s].mesh.positions.size() / 3;
 		}
-		vertices = new VertexArray(totalVerticesCount);
+		vertices = new OneDimensionalArray<Vertex>(totalVerticesCount);
 
 		for(size_t s = 0; s < shapes.size(); ++s)
 		{
@@ -74,7 +74,7 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 		{
 			totalFacesCount += shapes[s].mesh.indices.size() / 3;
 		}
-		faces = new FaceArray(totalFacesCount);
+		faces = new OneDimensionalArray<Face>(totalFacesCount);
 
 		for(size_t s = 0; s < shapes.size(); ++s)
 		{

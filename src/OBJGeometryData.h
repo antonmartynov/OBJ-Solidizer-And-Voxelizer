@@ -1,8 +1,9 @@
 #ifndef OBJGeometryDataH
 #define OBJGeometryDataH
 
-#include "VertexArray.h"
-#include "FaceArray.h"
+#include "Vertex.h"
+#include "Face.h"
+#include "OneDimensionalArray.h"
 #include "FileIO.h"
 #include "tiny_obj_loader.h"
 
@@ -38,8 +39,8 @@ public:
 private:
 
 	UnicodeString filename;
-	VertexArray * vertices;
-	FaceArray * faces;
+	OneDimensionalArray<Vertex> * vertices;
+	OneDimensionalArray<Face> * faces;
 };
 
 struct PtrAndString

@@ -37,5 +37,9 @@
     <Transaction>2015.01.19 12:21:12.593.h,P:\code\OBJSolidizerAndVoxelizer\tiny_obj_loader.h=</Transaction>
     <Transaction>2015.01.19 12:21:33.906.cpp,P:\code\OBJSolidizerAndVoxelizer\Unit1.cpp=P:\code\OBJSolidizerAndVoxelizer\tiny_obj_loader.cpp</Transaction>
     <Transaction>2015.01.19 12:21:33.906.h,P:\code\OBJSolidizerAndVoxelizer\Unit1.h=P:\code\OBJSolidizerAndVoxelizer\tiny_obj_loader.h</Transaction>
+    <Transaction>2015.01.19 15:25:08.328.cpp,P:\code\OBJSolidizerAndVoxelizer\Unit1.cpp=P:\code\OBJSolidizerAndVoxelizer\OneDimensionalArray.cpp</Transaction>
+    <Transaction>2015.01.19 15:25:08.328.h,P:\code\OBJSolidizerAndVoxelizer\Unit1.h=P:\code\OBJSolidizerAndVoxelizer\OneDimensionalArray.h</Transaction>
+    <Transaction>2015.01.19 15:30:18.921.cpp,P:\code\OBJSolidizerAndVoxelizer\VertexArray.cpp=</Transaction>
+    <Transaction>2015.01.19 15:30:22.046.cpp,P:\code\OBJSolidizerAndVoxelizer\FaceArray.cpp=</Transaction>
   </Transactions>
 </BorlandProject>
