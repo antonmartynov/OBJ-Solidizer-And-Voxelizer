@@ -100,6 +100,14 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 		loadFileStatus.currentOperationName = "Found " + UnicodeString(totalFacesCount) + " faces.";
 
     }
+	loadFileStatus.status = 1;
+}
+
+DWORD WINAPI loadFileWrapper(LPVOID lpParameter)
+{
+	PtrAndString * ptrAndString = (PtrAndString *)lpParameter;
+	ptrAndString->objGeometryData->loadFile(ptrAndString->filenameString);
+	return 0;
 }
 
 void OBJGeometryData::saveFile(UnicodeString OBJFilename)
@@ -113,21 +121,37 @@ void OBJGeometryData::saveFile(UnicodeString OBJFilename)
 	// what (and why) can happen if you don't!)
 	setlocale(LC_NUMERIC, "C");
 
+	saveFileStatus.currentOperationName = "Writing vertices information...";
+	saveFileStatus.currentOperationProgress = 0.0f;
+	saveFileStatus.status = 0;
 	for(int v = 0; v < vertices->getCount(); ++v)
 	{
 		outputString = outputString + "v " + UnicodeString(vertices->getElement(v)->x) + " " +
 											 UnicodeString(vertices->getElement(v)->y) + " " +
 											 UnicodeString(vertices->getElement(v)->z) + lineBreak;
+		saveFileStatus.currentOperationProgress += 1.0f / vertices->getCount();
 	}
+
+	saveFileStatus.currentOperationName = "Writing indices information...";
+	saveFileStatus.currentOperationProgress = 0.0f;
+	saveFileStatus.status = 0;
 	for(int f = 0; f < faces->getCount(); ++f)
 	{
 		outputString = outputString + "f " + UnicodeString(faces->getElement(f)->v1 + 1) + " " +
 											 UnicodeString(faces->getElement(f)->v2 + 1) + " " +
 											 UnicodeString(faces->getElement(f)->v3 + 1) + lineBreak;
+		saveFileStatus.currentOperationProgress += 1.0f / faces->getCount();
 	}
 
 	// Switching back to system default locale for numerals
 	setlocale(LC_NUMERIC, "");
 
 	fileio::writeFile(OBJFilename, outputString);
+}
+
+DWORD WINAPI saveFileWrapper(LPVOID lpParameter)
+{
+	PtrAndString * ptrAndString = (PtrAndString *)lpParameter;
+	ptrAndString->objGeometryData->saveFile(ptrAndString->filenameString);
+	return 0;
 }

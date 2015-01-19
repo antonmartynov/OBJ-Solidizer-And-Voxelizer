@@ -32,11 +32,20 @@ public:
 	void saveFile(UnicodeString OBJFilename);
 	operationStatus saveFileStatus;
 
+	friend DWORD WINAPI loadFileWrapper(LPVOID lpParameter);
+	friend DWORD WINAPI saveFileWrapper(LPVOID lpParameter);
+
 private:
 
 	UnicodeString filename;
 	VertexArray * vertices;
 	FaceArray * faces;
+};
+
+struct PtrAndString
+{
+	OBJGeometryData * objGeometryData;
+	UnicodeString filenameString;
 };
 
 #endif

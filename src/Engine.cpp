@@ -17,10 +17,16 @@ void Engine::initialize()
 
 void Engine::loadFile(UnicodeString filename)
 {
-	geometryData->loadFile(filename);
+	PtrAndString * ptrAndString = new PtrAndString;
+	ptrAndString->objGeometryData = geometryData;
+	ptrAndString->filenameString = filename;
+	CreateThread(NULL, 0, loadFileWrapper, (void *)ptrAndString, 0, NULL);
 }
 
 void Engine::saveFile(UnicodeString filename)
 {
-	geometryData->saveFile(filename);
+	PtrAndString * ptrAndString = new PtrAndString;
+	ptrAndString->objGeometryData = geometryData;
+	ptrAndString->filenameString = filename;
+	CreateThread(NULL, 0, saveFileWrapper, (void *)ptrAndString, 0, NULL);
 }

@@ -22,15 +22,39 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
-	Form1->Memo1->Clear();
-	engine->geometryData->loadFile(Form1->Edit1->Text);
-	Form1-Memo1->Lines->Add(engine->geometryData->loadFileStatus.currentOperationName);
+	engine->loadFile(Form1->Edit1->Text);
+    Form1->Timer1->Enabled = true;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::Button2Click(TObject *Sender)
 {
-	engine->geometryData->saveFile(Form1->Edit2->Text);
+	engine->saveFile(Form1->Edit2->Text);
+	Form1->Timer2->Enabled = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Timer1Timer(TObject *Sender)
+{
+	Form1->Memo1->Clear();
+	Form1-Memo1->Lines->Add(engine->geometryData->loadFileStatus.currentOperationName + ": " +
+							UnicodeString(engine->geometryData->loadFileStatus.currentOperationProgress * 100.0f) + "%");
+	if(engine->geometryData->loadFileStatus.status == 1)
+	{
+		Form1->Timer1->Enabled = false;
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Timer2Timer(TObject *Sender)
+{
+	Form1->Memo1->Clear();
+	Form1-Memo1->Lines->Add(engine->geometryData->saveFileStatus.currentOperationName + ": " +
+							UnicodeString(engine->geometryData->saveFileStatus.currentOperationProgress * 100.0f) + "%");
+	if(engine->geometryData->saveFileStatus.status == 1)
+	{
+		Form1->Timer2->Enabled = false;
+	}
 }
 //---------------------------------------------------------------------------
 

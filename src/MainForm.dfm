@@ -59,4 +59,18 @@ object Form1: TForm1
     TabOrder = 4
     Text = 'P:\resaved.obj'
   end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 16
+    OnTimer = Timer1Timer
+    Left = 224
+    Top = 72
+  end
+  object Timer2: TTimer
+    Enabled = False
+    Interval = 16
+    OnTimer = Timer2Timer
+    Left = 368
+    Top = 72
+  end
 end
