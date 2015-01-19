@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015.01.19 00:38:55.203.cpp,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Unit2.cpp=C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Vertex.cpp</Transaction>
+    <Transaction>2015.01.19 00:38:55.203.h,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Unit2.h=C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Vertex.h</Transaction>
+    <Transaction>2015.01.19 00:41:46.906.cpp,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Unit2.cpp=C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\VertexArray.cpp</Transaction>
+    <Transaction>2015.01.19 00:41:46.906.h,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Unit2.h=C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\VertexArray.h</Transaction>
+    <Transaction>2015.01.19 00:45:38.656.cpp,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\VertexArray.cpp=C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\OneDimensionalArray.cpp</Transaction>
+    <Transaction>2015.01.19 00:45:38.656.h,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\VertexArray.h=C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\OneDimensionalArray.h</Transaction>
+    <Transaction>2015.01.19 00:57:30.828.cbproj,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Project1.cbproj=C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\OBJSolidizerAndVoxelizer.cbproj</Transaction>
+    <Transaction>2015.01.19 00:57:37.781.cpp,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Unit1.cpp=C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\MainForm.cpp</Transaction>
+    <Transaction>2015.01.19 00:57:37.781.h,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Unit1.h=C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\MainForm.h</Transaction>
+    <Transaction>2015.01.19 00:57:37.781.dfm,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Unit1.dfm=C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\MainForm.dfm</Transaction>
+    <Transaction>2015.01.19 00:59:50.125.cpp,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\OneDimensionalArray.cpp=P:\code\OBJSolidizerAndVoxelizer\OneDimensionalArray.cpp</Transaction>
+    <Transaction>2015.01.19 00:59:50.125.h,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\OneDimensionalArray.h=P:\code\OBJSolidizerAndVoxelizer\OneDimensionalArray.h</Transaction>
+    <Transaction>2015.01.19 00:59:50.562.cpp,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Vertex.cpp=P:\code\OBJSolidizerAndVoxelizer\Vertex.cpp</Transaction>
+    <Transaction>2015.01.19 00:59:50.562.h,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\Vertex.h=P:\code\OBJSolidizerAndVoxelizer\Vertex.h</Transaction>
+    <Transaction>2015.01.19 00:59:51.046.cpp,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\MainForm.cpp=P:\code\OBJSolidizerAndVoxelizer\MainForm.cpp</Transaction>
+    <Transaction>2015.01.19 00:59:51.046.h,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\MainForm.h=P:\code\OBJSolidizerAndVoxelizer\MainForm.h</Transaction>
+    <Transaction>2015.01.19 00:59:51.046.dfm,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\MainForm.dfm=P:\code\OBJSolidizerAndVoxelizer\MainForm.dfm</Transaction>
+    <Transaction>2015.01.19 00:59:51.562.cbproj,C:\Documents and Settings\User1\Мои документы\RAD Studio\Projects\OBJSolidizerAndVoxelizer.cbproj=P:\code\OBJSolidizerAndVoxelizer\OBJSolidizerAndVoxelizer.cbproj</Transaction>
+    <Transaction>2015.01.19 01:21:23.046.cpp,P:\code\OBJSolidizerAndVoxelizer\OneDimensionalArray.cpp=P:\code\OBJSolidizerAndVoxelizer\VertexArray.cpp</Transaction>
+    <Transaction>2015.01.19 01:21:23.062.h,P:\code\OBJSolidizerAndVoxelizer\OneDimensionalArray.h=P:\code\OBJSolidizerAndVoxelizer\VertexArray.h</Transaction>
+    <Transaction>2015.01.19 01:55:44.781.cpp,P:\code\OBJSolidizerAndVoxelizer\Unit1.cpp=P:\code\OBJSolidizerAndVoxelizer\IndexArray.cpp</Transaction>
+    <Transaction>2015.01.19 01:55:44.796.h,P:\code\OBJSolidizerAndVoxelizer\Unit1.h=P:\code\OBJSolidizerAndVoxelizer\IndexArray.h</Transaction>
+    <Transaction>2015.01.19 02:03:48.687.cpp,P:\code\OBJSolidizerAndVoxelizer\Unit1.cpp=P:\code\OBJSolidizerAndVoxelizer\OBJGeometryData.cpp</Transaction>
+    <Transaction>2015.01.19 02:03:48.687.h,P:\code\OBJSolidizerAndVoxelizer\Unit1.h=P:\code\OBJSolidizerAndVoxelizer\OBJGeometryData.h</Transaction>
+    <Transaction>2015.01.19 02:22:26.640.cpp,P:\code\OBJSolidizerAndVoxelizer\Unit1.cpp=P:\code\OBJSolidizerAndVoxelizer\FileIO.cpp</Transaction>
+    <Transaction>2015.01.19 02:22:26.640.h,P:\code\OBJSolidizerAndVoxelizer\Unit1.h=P:\code\OBJSolidizerAndVoxelizer\FileIO.h</Transaction>
+    <Transaction>2015.01.19 10:22:47.703.cpp,P:\code\OBJSolidizerAndVoxelizer\Unit1.cpp=P:\code\OBJSolidizerAndVoxelizer\Face.cpp</Transaction>
+    <Transaction>2015.01.19 10:22:47.703.h,P:\code\OBJSolidizerAndVoxelizer\Unit1.h=P:\code\OBJSolidizerAndVoxelizer\Face.h</Transaction>
+    <Transaction>2015.01.19 10:24:07.203.cpp,P:\code\OBJSolidizerAndVoxelizer\IndexArray.cpp=P:\code\OBJSolidizerAndVoxelizer\FaceArray.cpp</Transaction>
+    <Transaction>2015.01.19 10:24:07.203.h,P:\code\OBJSolidizerAndVoxelizer\IndexArray.h=P:\code\OBJSolidizerAndVoxelizer\FaceArray.h</Transaction>
+    <Transaction>2015.01.19 11:05:02.953.cpp,P:\code\OBJSolidizerAndVoxelizer\Unit1.cpp=P:\code\OBJSolidizerAndVoxelizer\Engine.cpp</Transaction>
+    <Transaction>2015.01.19 11:05:02.968.h,P:\code\OBJSolidizerAndVoxelizer\Unit1.h=P:\code\OBJSolidizerAndVoxelizer\Engine.h</Transaction>
+    <Transaction>2015.01.19 12:21:10.765.cc,P:\code\OBJSolidizerAndVoxelizer\tiny_obj_loader.cc=</Transaction>
+    <Transaction>2015.01.19 12:21:12.593.h,P:\code\OBJSolidizerAndVoxelizer\tiny_obj_loader.h=</Transaction>
+    <Transaction>2015.01.19 12:21:33.906.cpp,P:\code\OBJSolidizerAndVoxelizer\Unit1.cpp=P:\code\OBJSolidizerAndVoxelizer\tiny_obj_loader.cpp</Transaction>
+    <Transaction>2015.01.19 12:21:33.906.h,P:\code\OBJSolidizerAndVoxelizer\Unit1.h=P:\code\OBJSolidizerAndVoxelizer\tiny_obj_loader.h</Transaction>
+  </Transactions>
+</BorlandProject>
