@@ -44,3 +44,8 @@ void Engine::saveFile(UnicodeString filename)
 	ptrAndString->filenameString = filename;
 	CreateThread(NULL, 0, saveFileWrapper, (void *)ptrAndString, 0, NULL);
 }
+
+void Engine::initVoxelizer()
+{
+	voxelizer->setGeometryData(geometryData);
+}

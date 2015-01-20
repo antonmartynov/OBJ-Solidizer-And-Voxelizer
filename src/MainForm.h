@@ -31,7 +31,7 @@ __published:	// IDE-managed Components
 	TProgressBar *ProgressBarResaveFileCurrentOperation;
 	TLabel *LabelResaveFileOverallProgress;
 	TProgressBar *ProgressBarResaveFileOverallProgress;
-	TGroupBox *GroupBox1;
+	TGroupBox *GroupBoxOBJGeometryInformation;
 	TLabel *LabelOBJInformationAmountOfVertices;
 	TLabel *LabelOBJInformationAmountOfFaces;
 	TLabel *LabelOBJInformationXMin;
@@ -40,10 +40,13 @@ __published:	// IDE-managed Components
 	TLabel *LabelOBJInformationYMax;
 	TLabel *LabelOBJInformationZMin;
 	TLabel *LabelOBJInformationZMax;
+	TGroupBox *GroupBoxVoxelizationSettings;
+	TButton *ButtonInitVoxelizer;
 	void __fastcall ButtonLoadFileClick(TObject *Sender);
 	void __fastcall TimerTrackLoadFileOperationStatusTimer(TObject *Sender);
 	void __fastcall TimerTrackResaveFileOperationStatusTimer(TObject *Sender);
 	void __fastcall ButtonResaveFileClick(TObject *Sender);
+	void __fastcall ButtonInitVoxelizerClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);

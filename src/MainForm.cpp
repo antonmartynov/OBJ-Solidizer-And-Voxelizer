@@ -66,3 +66,9 @@ void __fastcall TForm1::TimerTrackResaveFileOperationStatusTimer(TObject *Sender
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::ButtonInitVoxelizerClick(TObject *Sender)
+{
+	engine->initVoxelizer();
+}
+//---------------------------------------------------------------------------
+

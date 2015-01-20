@@ -6,7 +6,7 @@ object Form1: TForm1
   Caption = 
     'OBJ Solidizer And Voxelizer v0 - https://github.com/antonmartyno' +
     'v/OBJ-Solidizer-And-Voxelizer'
-  ClientHeight = 504
+  ClientHeight = 576
   ClientWidth = 480
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -145,7 +145,7 @@ object Form1: TForm1
       TabOrder = 3
     end
   end
-  object GroupBox1: TGroupBox
+  object GroupBoxOBJGeometryInformation: TGroupBox
     Left = 8
     Top = 184
     Width = 465
@@ -215,6 +215,23 @@ object Form1: TForm1
       Height = 17
       AutoSize = False
       Caption = 'Z max:'
+    end
+  end
+  object GroupBoxVoxelizationSettings: TGroupBox
+    Left = 8
+    Top = 504
+    Width = 465
+    Height = 65
+    Caption = 'Voxelization settings'
+    TabOrder = 3
+    object ButtonInitVoxelizer: TButton
+      Left = 16
+      Top = 24
+      Width = 97
+      Height = 25
+      Caption = 'Init voxelizer'
+      TabOrder = 0
+      OnClick = ButtonInitVoxelizerClick
     end
   end
   object TimerTrackResaveFileOperationStatus: TTimer
