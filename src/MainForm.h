@@ -60,12 +60,17 @@ __published:	// IDE-managed Components
 	TLabel *LabelGridStep;
 	TLabel *LabelGridDimensions;
 	TButton *ButtonSetOptimalGrid;
+	TGroupBox *GroupBoxProcess;
+	TButton *ButtonRandomize;
+	TButton *ButtonMakeCubeGeometry;
 	void __fastcall ButtonLoadFileClick(TObject *Sender);
 	void __fastcall TimerTrackLoadFileOperationStatusTimer(TObject *Sender);
 	void __fastcall TimerTrackResaveFileOperationStatusTimer(TObject *Sender);
 	void __fastcall ButtonResaveFileClick(TObject *Sender);
 	void __fastcall ButtonInitVoxelizerClick(TObject *Sender);
 	void __fastcall ButtonSetOptimalGridClick(TObject *Sender);
+	void __fastcall ButtonRandomizeClick(TObject *Sender);
+	void __fastcall ButtonMakeCubeGeometryClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);

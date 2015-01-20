@@ -48,7 +48,7 @@ public:
 	operationStatus saveFileStatus;
 	OBJInformation spatialInformation;
 
-private:
+//private:
 
 	UnicodeString filename;
 	OneDimensionalArray<Vertex> * vertices;

@@ -6,7 +6,7 @@ object Form1: TForm1
   Caption = 
     'OBJ Solidizer And Voxelizer v0 - https://github.com/antonmartyno' +
     'v/OBJ-Solidizer-And-Voxelizer'
-  ClientHeight = 664
+  ClientHeight = 743
   ClientWidth = 480
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -377,6 +377,32 @@ object Form1: TForm1
       Caption = 'Set optimal grid'
       TabOrder = 1
       OnClick = ButtonSetOptimalGridClick
+    end
+  end
+  object GroupBoxProcess: TGroupBox
+    Left = 8
+    Top = 664
+    Width = 465
+    Height = 65
+    Caption = 'Process'
+    TabOrder = 4
+    object ButtonRandomize: TButton
+      Left = 16
+      Top = 24
+      Width = 97
+      Height = 25
+      Caption = 'Randomize voxels'
+      TabOrder = 0
+      OnClick = ButtonRandomizeClick
+    end
+    object ButtonMakeCubeGeometry: TButton
+      Left = 128
+      Top = 24
+      Width = 97
+      Height = 25
+      Caption = 'Make cubes'
+      TabOrder = 1
+      OnClick = ButtonMakeCubeGeometryClick
     end
   end
   object TimerTrackResaveFileOperationStatus: TTimer

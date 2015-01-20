@@ -40,6 +40,7 @@ public:
 	void allocate();
 	void deallocate();
 	Dimensions getDimensions();
+	bool *** getData();
 
 private:
 

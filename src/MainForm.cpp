@@ -75,7 +75,7 @@ void __fastcall TForm1::ButtonInitVoxelizerClick(TObject *Sender)
 
 void __fastcall TForm1::ButtonSetOptimalGridClick(TObject *Sender)
 {
-	engine->voxelizer->initVoxelGrid(engine->voxelizer->computeOptimalGridDimensions(1000.0f));
+	engine->voxelizer->initVoxelGrid(engine->voxelizer->computeOptimalGridDimensions(0.6f));
 
 	Dimensions optimalDimensions = engine->voxelizer->getVoxelGridDimensions();
 	Form1->LabelGridDimensionsStartX->Caption = UnicodeString(optimalDimensions.x.start);
@@ -89,6 +89,18 @@ void __fastcall TForm1::ButtonSetOptimalGridClick(TObject *Sender)
 	Form1->LabelGridDimensionsEndZ->Caption = UnicodeString(optimalDimensions.z.start + optimalDimensions.z.step * (float)(optimalDimensions.z.count - 1));
 
 	Form1->LabelGridStep->Caption = "Grid step = " + UnicodeString(optimalDimensions.x.step);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::ButtonRandomizeClick(TObject *Sender)
+{
+	engine->voxelizer->randomizeVoxelValues();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::ButtonMakeCubeGeometryClick(TObject *Sender)
+{
+	engine->voxelizer->makeCubeGeometryFromVoxels();
 }
 //---------------------------------------------------------------------------
 

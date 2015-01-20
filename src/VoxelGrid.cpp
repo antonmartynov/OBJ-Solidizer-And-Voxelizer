@@ -46,3 +46,8 @@ Dimensions VoxelGrid::getDimensions()
 {
 	return dimensions;
 }
+
+bool *** VoxelGrid::getData()
+{
+    return data;
+}

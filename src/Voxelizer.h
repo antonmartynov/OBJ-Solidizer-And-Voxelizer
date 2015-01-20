@@ -17,6 +17,10 @@ public:
 	void initVoxelGrid(Dimensions dimensions);
 	Dimensions getVoxelGridDimensions();
 
+	void randomizeVoxelValues();
+
+	OBJGeometryData * makeCubeGeometryFromVoxels();
+
 private:
 
 	OBJGeometryData * geometryData;

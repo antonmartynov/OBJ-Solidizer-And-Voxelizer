@@ -144,7 +144,7 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 			}
 
 			loadFileStatus.currentOperationProgress += 1.0f / spatialInformation.verticesCount;
-				loadFileStatus.overallProgress += 1.0f / (2 * spatialInformation.verticesCount + spatialInformation.facesCount);
+			loadFileStatus.overallProgress += 1.0f / (2 * spatialInformation.verticesCount + spatialInformation.facesCount);
         }
 
 		loadFileStatus.currentOperationName = "Done!";
