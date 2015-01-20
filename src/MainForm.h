@@ -42,11 +42,30 @@ __published:	// IDE-managed Components
 	TLabel *LabelOBJInformationZMax;
 	TGroupBox *GroupBoxVoxelizationSettings;
 	TButton *ButtonInitVoxelizer;
+	TLabel *LabelGridDimensionsStart;
+	TLabel *LabelGridDimensionsCount;
+	TLabel *LabelGridDimensionsEnd;
+	TLabel *LabelGridDimensionsX;
+	TLabel *LabelGridDimensionsY;
+	TLabel *LabelGridDimensionsZ;
+	TLabel *LabelGridDimensionsStartX;
+	TLabel *LabelGridDimensionsStartY;
+	TLabel *LabelGridDimensionsStartZ;
+	TLabel *LabelGridDimensionsCountX;
+	TLabel *LabelGridDimensionsCountY;
+	TLabel *LabelGridDimensionsCountZ;
+	TLabel *LabelGridDimensionsEndX;
+	TLabel *LabelGridDimensionsEndY;
+	TLabel *LabelGridDimensionsEndZ;
+	TLabel *LabelGridStep;
+	TLabel *LabelGridDimensions;
+	TButton *ButtonSetOptimalGrid;
 	void __fastcall ButtonLoadFileClick(TObject *Sender);
 	void __fastcall TimerTrackLoadFileOperationStatusTimer(TObject *Sender);
 	void __fastcall TimerTrackResaveFileOperationStatusTimer(TObject *Sender);
 	void __fastcall ButtonResaveFileClick(TObject *Sender);
 	void __fastcall ButtonInitVoxelizerClick(TObject *Sender);
+	void __fastcall ButtonSetOptimalGridClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);

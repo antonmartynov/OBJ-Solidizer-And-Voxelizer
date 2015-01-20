@@ -1,13 +1,14 @@
 #include "VoxelGrid.h"
 
-VoxelGrid::VoxelGrid()
+VoxelGrid::VoxelGrid(Dimensions initDimensions)
 {
-	//
+	setDimensions(initDimensions);
+	allocate();
 }
 
 VoxelGrid::~VoxelGrid()
 {
-	//
+	deallocate();
 }
 
 void VoxelGrid::setDimensions(Dimensions initDimensions)
@@ -39,4 +40,9 @@ void VoxelGrid::deallocate()
 		delete [] data[x];
 	}
 	delete [] data;
+}
+
+Dimensions VoxelGrid::getDimensions()
+{
+	return dimensions;
 }

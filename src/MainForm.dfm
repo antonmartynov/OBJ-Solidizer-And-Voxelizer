@@ -6,7 +6,7 @@ object Form1: TForm1
   Caption = 
     'OBJ Solidizer And Voxelizer v0 - https://github.com/antonmartyno' +
     'v/OBJ-Solidizer-And-Voxelizer'
-  ClientHeight = 576
+  ClientHeight = 664
   ClientWidth = 480
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -221,9 +221,145 @@ object Form1: TForm1
     Left = 8
     Top = 504
     Width = 465
-    Height = 65
+    Height = 153
     Caption = 'Voxelization settings'
     TabOrder = 3
+    object LabelGridDimensionsStart: TLabel
+      Left = 232
+      Top = 48
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = 'Start'
+    end
+    object LabelGridDimensionsCount: TLabel
+      Left = 312
+      Top = 48
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = 'Count'
+    end
+    object LabelGridDimensionsEnd: TLabel
+      Left = 392
+      Top = 48
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = 'End'
+    end
+    object LabelGridDimensionsX: TLabel
+      Left = 176
+      Top = 72
+      Width = 31
+      Height = 17
+      AutoSize = False
+      Caption = 'X'
+    end
+    object LabelGridDimensionsY: TLabel
+      Left = 176
+      Top = 96
+      Width = 31
+      Height = 17
+      AutoSize = False
+      Caption = 'Y'
+    end
+    object LabelGridDimensionsZ: TLabel
+      Left = 176
+      Top = 120
+      Width = 31
+      Height = 17
+      AutoSize = False
+      Caption = 'Z'
+    end
+    object LabelGridDimensionsStartX: TLabel
+      Left = 232
+      Top = 72
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = '0000'
+    end
+    object LabelGridDimensionsStartY: TLabel
+      Left = 232
+      Top = 96
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = '0000'
+    end
+    object LabelGridDimensionsStartZ: TLabel
+      Left = 232
+      Top = 120
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = '0000'
+    end
+    object LabelGridDimensionsCountX: TLabel
+      Left = 312
+      Top = 72
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = '0000'
+    end
+    object LabelGridDimensionsCountY: TLabel
+      Left = 312
+      Top = 96
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = '0000'
+    end
+    object LabelGridDimensionsCountZ: TLabel
+      Left = 312
+      Top = 120
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = '0000'
+    end
+    object LabelGridDimensionsEndX: TLabel
+      Left = 392
+      Top = 72
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = '0000'
+    end
+    object LabelGridDimensionsEndY: TLabel
+      Left = 392
+      Top = 96
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = '0000'
+    end
+    object LabelGridDimensionsEndZ: TLabel
+      Left = 392
+      Top = 120
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = '0000'
+    end
+    object LabelGridStep: TLabel
+      Left = 16
+      Top = 96
+      Width = 145
+      Height = 17
+      AutoSize = False
+      Caption = 'Grid step = '
+    end
+    object LabelGridDimensions: TLabel
+      Left = 16
+      Top = 120
+      Width = 145
+      Height = 17
+      AutoSize = False
+      Caption = 'Grid dimensions '#8211'>'
+    end
     object ButtonInitVoxelizer: TButton
       Left = 16
       Top = 24
@@ -232,6 +368,15 @@ object Form1: TForm1
       Caption = 'Init voxelizer'
       TabOrder = 0
       OnClick = ButtonInitVoxelizerClick
+    end
+    object ButtonSetOptimalGrid: TButton
+      Left = 16
+      Top = 56
+      Width = 97
+      Height = 25
+      Caption = 'Set optimal grid'
+      TabOrder = 1
+      OnClick = ButtonSetOptimalGridClick
     end
   end
   object TimerTrackResaveFileOperationStatus: TTimer

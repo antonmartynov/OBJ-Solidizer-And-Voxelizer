@@ -69,6 +69,26 @@ void __fastcall TForm1::TimerTrackResaveFileOperationStatusTimer(TObject *Sender
 void __fastcall TForm1::ButtonInitVoxelizerClick(TObject *Sender)
 {
 	engine->initVoxelizer();
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::ButtonSetOptimalGridClick(TObject *Sender)
+{
+	engine->voxelizer->initVoxelGrid(engine->voxelizer->computeOptimalGridDimensions(1000.0f));
+
+	Dimensions optimalDimensions = engine->voxelizer->getVoxelGridDimensions();
+	Form1->LabelGridDimensionsStartX->Caption = UnicodeString(optimalDimensions.x.start);
+	Form1->LabelGridDimensionsCountX->Caption = UnicodeString(optimalDimensions.x.count);
+	Form1->LabelGridDimensionsEndX->Caption = UnicodeString(optimalDimensions.x.start + optimalDimensions.x.step * (float)(optimalDimensions.x.count - 1));
+	Form1->LabelGridDimensionsStartY->Caption = UnicodeString(optimalDimensions.y.start);
+	Form1->LabelGridDimensionsCountY->Caption = UnicodeString(optimalDimensions.y.count);
+	Form1->LabelGridDimensionsEndY->Caption = UnicodeString(optimalDimensions.y.start + optimalDimensions.y.step * (float)(optimalDimensions.y.count - 1));
+	Form1->LabelGridDimensionsStartZ->Caption = UnicodeString(optimalDimensions.z.start);
+	Form1->LabelGridDimensionsCountZ->Caption = UnicodeString(optimalDimensions.z.count);
+	Form1->LabelGridDimensionsEndZ->Caption = UnicodeString(optimalDimensions.z.start + optimalDimensions.z.step * (float)(optimalDimensions.z.count - 1));
+
+	Form1->LabelGridStep->Caption = "Grid step = " + UnicodeString(optimalDimensions.x.step);
 }
 //---------------------------------------------------------------------------
 
