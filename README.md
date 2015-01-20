@@ -5,12 +5,27 @@ Makes use of syoyo's tinyobjloader for opening OBJ files: https://github.com/syo
 
 Current status: infinitely deep alpha. Doesn't actually do what it's supposed to do (yet).
 
-Issues / TODO / Plans:
-- Writing the OBJ file is terribly slow and must be fixed ASAP (I've pinpointed the source of the problem).
-- Voxelize the loaded geometry.
-- Optimize the voxelization process by using octrees.
-- Output the voxelization results to file / generate an OBJ made out of cubes based on the voxelization results.
-- Various voxelization parameters.
-- (Long-term goal) export the voxelization results to Minecraft.
+This project was born out of the idea of recreating a map from a [portal engine](http://en.wikipedia.org/wiki/Portal_rendering "Wikipedia: Portal rendering") based game (Blade Of Darkness) in Minecraft (a sandbox game with a voxel-like landscape); however, it can be used for voxelizing any OBJ geometry in general. In the future, I'll provide a small library for reading the output files of OBJ Solidizer And Voxelizer.
 
-This project was born out of the idea of recreating a map from a portal engine based game (Blade Of Darkness) in Minecraft (a voxel landscape game).
+*"I'm a solidizer
+Object voxelizer"*
+- Lolzo, upon seeing the project name
+
+#Roadmap
+
+Short-term plans:
+- Make the working proof-of-concept version. Barely any optimizations.
+- Fix the tremendously long operation of writing the OBJ file.
+
+Medium-term plans:
+- Add various voxelization parameters
+- Heavily optimize the engine:
+-- Use std::vectors wherever possible
+-- More compact storage of voxel data
+-- Algorithm optimizations
+-- Use octrees for storing / accessing geometry
+
+Long-term plans:
+- Generate an optimized cube representation of the voxelized geometry
+- Export the results to a Minecraft world
+- Visualization of the process (or input / output data)

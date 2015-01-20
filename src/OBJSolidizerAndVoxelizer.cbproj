@@ -57,48 +57,52 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="Face.cpp">
-				<DependentOn>Face.h</DependentOn>
-				<BuildOrder>8</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="Vertex.cpp">
-				<DependentOn>Vertex.h</DependentOn>
-				<BuildOrder>3</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="OBJGeometryData.cpp">
-				<DependentOn>OBJGeometryData.h</DependentOn>
-				<BuildOrder>6</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="OneDimensionalArray.cpp">
-				<DependentOn>OneDimensionalArray.h</DependentOn>
-				<BuildOrder>11</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="tiny_obj_loader.cpp">
-				<DependentOn>tiny_obj_loader.h</DependentOn>
-				<BuildOrder>10</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="OBJSolidizerAndVoxelizer.cpp">
-				<BuildOrder>0</BuildOrder>
-			</CppCompile>
-			<ResFiles Include="OBJSolidizerAndVoxelizer.res">
-				<BuildOrder>1</BuildOrder>
-			</ResFiles>
 			<CppCompile Include="MainForm.cpp">
 				<Form>Form1</Form>
 				<DependentOn>MainForm.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
+			<ResFiles Include="OBJSolidizerAndVoxelizer.res">
+				<BuildOrder>1</BuildOrder>
+			</ResFiles>
 			<CppCompile Include="FileIO.cpp">
 				<DependentOn>FileIO.h</DependentOn>
 				<BuildOrder>7</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="Voxelizer.cpp">
+				<DependentOn>Voxelizer.h</DependentOn>
+				<BuildOrder>10</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="Engine.cpp">
 				<DependentOn>Engine.h</DependentOn>
 				<BuildOrder>9</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="Voxelizer.cpp">
-				<DependentOn>Voxelizer.h</DependentOn>
+			<CppCompile Include="OBJSolidizerAndVoxelizer.cpp">
+				<BuildOrder>0</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="Vertex.cpp">
+				<DependentOn>Vertex.h</DependentOn>
+				<BuildOrder>3</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="Face.cpp">
+				<DependentOn>Face.h</DependentOn>
+				<BuildOrder>8</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="OBJGeometryData.cpp">
+				<DependentOn>OBJGeometryData.h</DependentOn>
+				<BuildOrder>6</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="tiny_obj_loader.cpp">
+				<DependentOn>tiny_obj_loader.h</DependentOn>
 				<BuildOrder>10</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="OneDimensionalArray.cpp">
+				<DependentOn>OneDimensionalArray.h</DependentOn>
+				<BuildOrder>11</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="VoxelGrid.cpp">
+				<DependentOn>VoxelGrid.h</DependentOn>
+				<BuildOrder>11</BuildOrder>
 			</CppCompile>
 			<FormResources Include="MainForm.dfm"/>
 			<BuildConfiguration Include="Base">
