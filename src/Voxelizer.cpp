@@ -66,13 +66,19 @@ void Voxelizer::randomizeVoxelValues()
     }
 }
 
+void Voxelizer::setFaceForCubeGenerator(OneDimensionalArray<Face> * faces, int currentVoxelIndex, int faceIndexInCube, int v1, int v2, int v3)
+{
+	faces->getElement(currentVoxelIndex * 12 + faceIndexInCube)->v1 = currentVoxelIndex * 8 + v1;
+	faces->getElement(currentVoxelIndex * 12 + faceIndexInCube)->v2 = currentVoxelIndex * 8 + v2;
+	faces->getElement(currentVoxelIndex * 12 + faceIndexInCube)->v3 = currentVoxelIndex * 8 + v3;
+}
+
 void Voxelizer::generateCubeFromVoxel(int currentVoxelIndex, OBJGeometryData * recipientGeometry, Dimensions gridDimensions, int xIndex, int yIndex, int zIndex)
 {
 	float currentXValue = gridDimensions.getXValue(xIndex);
 	float currentYValue = gridDimensions.getYValue(yIndex);
 	float currentZValue = gridDimensions.getZValue(zIndex);
 	float halfStep = gridDimensions.x.step / 2;
-
 	for(int v = 0; v < 8; ++v)
 	{
 		// procedural generation of cube vertices
@@ -81,56 +87,20 @@ void Voxelizer::generateCubeFromVoxel(int currentVoxelIndex, OBJGeometryData * r
 		pVertex->y = currentYValue + halfStep * ((v & (1<<1)) ? 1 : (-1));
 		pVertex->z = currentZValue + halfStep * ((v & (1<<0)) ? 1 : (-1));
 	}
-
+	// unfortunately, cube faces can't be procedurally generated
 	OneDimensionalArray<Face> * pFaces = recipientGeometry->faces;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 0)->v1 = currentVoxelIndex * 8 + 0;
-	pFaces->getElement(currentVoxelIndex * 12 + 0)->v2 = currentVoxelIndex * 8 + 1;
-	pFaces->getElement(currentVoxelIndex * 12 + 0)->v3 = currentVoxelIndex * 8 + 2;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 1)->v1 = currentVoxelIndex * 8 + 1;
-	pFaces->getElement(currentVoxelIndex * 12 + 1)->v2 = currentVoxelIndex * 8 + 3;
-	pFaces->getElement(currentVoxelIndex * 12 + 1)->v3 = currentVoxelIndex * 8 + 2;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 2)->v1 = currentVoxelIndex * 8 + 1;
-	pFaces->getElement(currentVoxelIndex * 12 + 2)->v2 = currentVoxelIndex * 8 + 5;
-	pFaces->getElement(currentVoxelIndex * 12 + 2)->v3 = currentVoxelIndex * 8 + 3;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 3)->v1 = currentVoxelIndex * 8 + 5;
-	pFaces->getElement(currentVoxelIndex * 12 + 3)->v2 = currentVoxelIndex * 8 + 7;
-	pFaces->getElement(currentVoxelIndex * 12 + 3)->v3 = currentVoxelIndex * 8 + 3;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 4)->v1 = currentVoxelIndex * 8 + 5;
-	pFaces->getElement(currentVoxelIndex * 12 + 4)->v2 = currentVoxelIndex * 8 + 4;
-	pFaces->getElement(currentVoxelIndex * 12 + 4)->v3 = currentVoxelIndex * 8 + 7;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 5)->v1 = currentVoxelIndex * 8 + 4;
-	pFaces->getElement(currentVoxelIndex * 12 + 5)->v2 = currentVoxelIndex * 8 + 6;
-	pFaces->getElement(currentVoxelIndex * 12 + 5)->v3 = currentVoxelIndex * 8 + 7;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 6)->v1 = currentVoxelIndex * 8 + 4;
-	pFaces->getElement(currentVoxelIndex * 12 + 6)->v2 = currentVoxelIndex * 8 + 0;
-	pFaces->getElement(currentVoxelIndex * 12 + 6)->v3 = currentVoxelIndex * 8 + 6;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 7)->v1 = currentVoxelIndex * 8 + 0;
-	pFaces->getElement(currentVoxelIndex * 12 + 7)->v2 = currentVoxelIndex * 8 + 2;
-	pFaces->getElement(currentVoxelIndex * 12 + 7)->v3 = currentVoxelIndex * 8 + 6;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 8)->v1 = currentVoxelIndex * 8 + 2;
-	pFaces->getElement(currentVoxelIndex * 12 + 8)->v2 = currentVoxelIndex * 8 + 3;
-	pFaces->getElement(currentVoxelIndex * 12 + 8)->v3 = currentVoxelIndex * 8 + 6;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 9)->v1 = currentVoxelIndex * 8 + 3;
-	pFaces->getElement(currentVoxelIndex * 12 + 9)->v2 = currentVoxelIndex * 8 + 7;
-	pFaces->getElement(currentVoxelIndex * 12 + 9)->v3 = currentVoxelIndex * 8 + 6;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 10)->v1 = currentVoxelIndex * 8 + 4;
-	pFaces->getElement(currentVoxelIndex * 12 + 10)->v2 = currentVoxelIndex * 8 + 5;
-	pFaces->getElement(currentVoxelIndex * 12 + 10)->v3 = currentVoxelIndex * 8 + 0;
-
-	pFaces->getElement(currentVoxelIndex * 12 + 11)->v1 = currentVoxelIndex * 8 + 1;
-	pFaces->getElement(currentVoxelIndex * 12 + 11)->v2 = currentVoxelIndex * 8 + 0;
-	pFaces->getElement(currentVoxelIndex * 12 + 11)->v3 = currentVoxelIndex * 8 + 5;
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 0, 0, 1, 2);
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 1, 1, 3, 2);
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 2, 1, 5, 3);
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 3, 5, 7, 3);
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 4, 5, 4, 7);
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 5, 4, 6, 7);
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 6, 4, 0, 6);
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 7, 0, 2, 6);
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 8, 2, 3, 6);
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 9, 3, 7, 6);
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 10, 4, 5, 0);
+	setFaceForCubeGenerator(pFaces, currentVoxelIndex, 11, 1, 0, 5);
 
 }
 
