@@ -7,6 +7,7 @@
 #include "FileIO.h"
 #include "tiny_obj_loader.h"
 #include "float.h"
+#include "VoxelGrid.h"
 
 /*
 Issues / TODO:
@@ -42,17 +43,22 @@ public:
 	OBJGeometryData();
 	~OBJGeometryData();
 
+	OBJInformation spatialInformation;
+
 	void loadFile(UnicodeString OBJFilename);
 	operationStatus loadFileStatus;
 	void saveFile(UnicodeString OBJFilename);
 	operationStatus saveFileStatus;
-	OBJInformation spatialInformation;
+	void generateFromVoxelGrid(VoxelGrid * voxelGrid);
 
-//private:
+private:
 
 	UnicodeString filename;
 	OneDimensionalArray<Vertex> * vertices;
 	OneDimensionalArray<Face> * faces;
+
+	void generateCubeFromVoxel(int voxelIndex, float halfStep, float xCoord, float yCoord, float zCoord);
+	void setFaceForCubeGenerator(int voxelIndex, int faceIndexInCube, int v1, int v2, int v3);
 };
 
 struct PtrAndString

@@ -201,3 +201,77 @@ void OBJGeometryData::saveFile(UnicodeString OBJFilename)
 	saveFileStatus.currentOperationName = "Done!";
 	saveFileStatus.status = 1;
 }
+
+void OBJGeometryData::generateFromVoxelGrid(VoxelGrid * voxelGrid)
+{
+	int filledVoxelsCount = 0;
+	for(int x = 0; x < voxelGrid->getDimensions().x.count; ++x)
+	{
+		for(int y = 0; y < voxelGrid->getDimensions().y.count; ++y)
+		{
+			for(int z = 0; z < voxelGrid->getDimensions().z.count; ++z)
+			{
+				if(voxelGrid->getData()[x][y][z] == true)
+				{
+					filledVoxelsCount++;
+				}
+			}
+		}
+	}
+	spatialInformation.verticesCount = filledVoxelsCount * 8;
+	vertices = new OneDimensionalArray<Vertex>(spatialInformation.verticesCount);
+	spatialInformation.facesCount = filledVoxelsCount * 12;
+	faces = new OneDimensionalArray<Face>(spatialInformation.facesCount);
+
+	int currentVoxelIndex = 0;
+	for(int x = 0; x < voxelGrid->getDimensions().x.count; ++x)
+	{
+		for(int y = 0; y < voxelGrid->getDimensions().y.count; ++y)
+		{
+			for(int z = 0; z < voxelGrid->getDimensions().z.count; ++z)
+			{
+				if(voxelGrid->getData()[x][y][z] == true)
+				{
+					float xCoord = voxelGrid->getDimensions().getXValue(x);
+					float yCoord = voxelGrid->getDimensions().getYValue(y);
+					float zCoord = voxelGrid->getDimensions().getZValue(z);
+					float halfStep = voxelGrid->getDimensions().x.step / 2;
+					generateCubeFromVoxel(currentVoxelIndex, halfStep, xCoord, yCoord, zCoord);
+					currentVoxelIndex++;
+				}
+			}
+		}
+	}
+}
+
+void OBJGeometryData::generateCubeFromVoxel(int voxelIndex, float halfStep, float xCoord, float yCoord, float zCoord)
+{
+	// procedural generation of cube vertices
+	for(int v = 0; v < 8; ++v)
+	{
+		Vertex * pVertex = vertices->getElement(voxelIndex * 8 + v);
+		pVertex->x = xCoord + halfStep * ((v & (1<<2)) ? 1 : (-1));
+		pVertex->y = yCoord + halfStep * ((v & (1<<1)) ? 1 : (-1));
+		pVertex->z = zCoord + halfStep * ((v & (1<<0)) ? 1 : (-1));
+	}
+	// unfortunately, cube faces cannot be procedurally generated
+	setFaceForCubeGenerator(voxelIndex,  0, 0, 1, 2);
+	setFaceForCubeGenerator(voxelIndex,  1, 1, 3, 2);
+	setFaceForCubeGenerator(voxelIndex,  2, 1, 5, 3);
+	setFaceForCubeGenerator(voxelIndex,  3, 5, 7, 3);
+	setFaceForCubeGenerator(voxelIndex,  4, 5, 4, 7);
+	setFaceForCubeGenerator(voxelIndex,  5, 4, 6, 7);
+	setFaceForCubeGenerator(voxelIndex,  6, 4, 0, 6);
+	setFaceForCubeGenerator(voxelIndex,  7, 0, 2, 6);
+	setFaceForCubeGenerator(voxelIndex,  8, 2, 3, 6);
+	setFaceForCubeGenerator(voxelIndex,  9, 3, 7, 6);
+	setFaceForCubeGenerator(voxelIndex, 10, 4, 5, 0);
+	setFaceForCubeGenerator(voxelIndex, 11, 1, 0, 5);
+}
+
+void OBJGeometryData::setFaceForCubeGenerator(int voxelIndex, int faceIndexInCube, int v1, int v2, int v3)
+{
+	faces->getElement(voxelIndex * 12 + faceIndexInCube)->v1 = voxelIndex * 8 + v1;
+	faces->getElement(voxelIndex * 12 + faceIndexInCube)->v2 = voxelIndex * 8 + v2;
+	faces->getElement(voxelIndex * 12 + faceIndexInCube)->v3 = voxelIndex * 8 + v3;
+}
