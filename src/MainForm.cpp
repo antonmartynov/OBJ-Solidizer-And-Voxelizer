@@ -75,7 +75,7 @@ void __fastcall TForm1::ButtonInitVoxelizerClick(TObject *Sender)
 
 void __fastcall TForm1::ButtonSetOptimalGridClick(TObject *Sender)
 {
-	engine->voxelizer->initVoxelGrid(engine->voxelizer->computeOptimalGridDimensions(0.6f));
+	engine->voxelizer->initVoxelGrid(engine->voxelizer->computeOptimalGridDimensions(0.3f));
 
 	Dimensions optimalDimensions = engine->voxelizer->getVoxelGridDimensions();
 	Form1->LabelGridDimensionsStartX->Caption = UnicodeString(optimalDimensions.x.start);

@@ -66,6 +66,74 @@ void Voxelizer::randomizeVoxelValues()
     }
 }
 
+void Voxelizer::generateCubeFromVoxel(int currentVoxelIndex, OBJGeometryData * recipientGeometry, Dimensions gridDimensions, int xIndex, int yIndex, int zIndex)
+{
+	float currentXValue = gridDimensions.getXValue(xIndex);
+	float currentYValue = gridDimensions.getYValue(yIndex);
+	float currentZValue = gridDimensions.getZValue(zIndex);
+	float halfStep = gridDimensions.x.step / 2;
+
+	for(int v = 0; v < 8; ++v)
+	{
+		// procedural generation of cube vertices
+		Vertex * pVertex = recipientGeometry->vertices->getElement(currentVoxelIndex * 8 + v);
+		pVertex->x = currentXValue + halfStep * ((v & (1<<2)) ? 1 : (-1));
+		pVertex->y = currentYValue + halfStep * ((v & (1<<1)) ? 1 : (-1));
+		pVertex->z = currentZValue + halfStep * ((v & (1<<0)) ? 1 : (-1));
+	}
+
+	OneDimensionalArray<Face> * pFaces = recipientGeometry->faces;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 0)->v1 = currentVoxelIndex * 8 + 0;
+	pFaces->getElement(currentVoxelIndex * 12 + 0)->v2 = currentVoxelIndex * 8 + 1;
+	pFaces->getElement(currentVoxelIndex * 12 + 0)->v3 = currentVoxelIndex * 8 + 2;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 1)->v1 = currentVoxelIndex * 8 + 1;
+	pFaces->getElement(currentVoxelIndex * 12 + 1)->v2 = currentVoxelIndex * 8 + 3;
+	pFaces->getElement(currentVoxelIndex * 12 + 1)->v3 = currentVoxelIndex * 8 + 2;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 2)->v1 = currentVoxelIndex * 8 + 1;
+	pFaces->getElement(currentVoxelIndex * 12 + 2)->v2 = currentVoxelIndex * 8 + 5;
+	pFaces->getElement(currentVoxelIndex * 12 + 2)->v3 = currentVoxelIndex * 8 + 3;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 3)->v1 = currentVoxelIndex * 8 + 5;
+	pFaces->getElement(currentVoxelIndex * 12 + 3)->v2 = currentVoxelIndex * 8 + 7;
+	pFaces->getElement(currentVoxelIndex * 12 + 3)->v3 = currentVoxelIndex * 8 + 3;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 4)->v1 = currentVoxelIndex * 8 + 5;
+	pFaces->getElement(currentVoxelIndex * 12 + 4)->v2 = currentVoxelIndex * 8 + 4;
+	pFaces->getElement(currentVoxelIndex * 12 + 4)->v3 = currentVoxelIndex * 8 + 7;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 5)->v1 = currentVoxelIndex * 8 + 4;
+	pFaces->getElement(currentVoxelIndex * 12 + 5)->v2 = currentVoxelIndex * 8 + 6;
+	pFaces->getElement(currentVoxelIndex * 12 + 5)->v3 = currentVoxelIndex * 8 + 7;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 6)->v1 = currentVoxelIndex * 8 + 4;
+	pFaces->getElement(currentVoxelIndex * 12 + 6)->v2 = currentVoxelIndex * 8 + 0;
+	pFaces->getElement(currentVoxelIndex * 12 + 6)->v3 = currentVoxelIndex * 8 + 6;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 7)->v1 = currentVoxelIndex * 8 + 0;
+	pFaces->getElement(currentVoxelIndex * 12 + 7)->v2 = currentVoxelIndex * 8 + 2;
+	pFaces->getElement(currentVoxelIndex * 12 + 7)->v3 = currentVoxelIndex * 8 + 6;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 8)->v1 = currentVoxelIndex * 8 + 2;
+	pFaces->getElement(currentVoxelIndex * 12 + 8)->v2 = currentVoxelIndex * 8 + 3;
+	pFaces->getElement(currentVoxelIndex * 12 + 8)->v3 = currentVoxelIndex * 8 + 6;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 9)->v1 = currentVoxelIndex * 8 + 3;
+	pFaces->getElement(currentVoxelIndex * 12 + 9)->v2 = currentVoxelIndex * 8 + 7;
+	pFaces->getElement(currentVoxelIndex * 12 + 9)->v3 = currentVoxelIndex * 8 + 6;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 10)->v1 = currentVoxelIndex * 8 + 4;
+	pFaces->getElement(currentVoxelIndex * 12 + 10)->v2 = currentVoxelIndex * 8 + 5;
+	pFaces->getElement(currentVoxelIndex * 12 + 10)->v3 = currentVoxelIndex * 8 + 0;
+
+	pFaces->getElement(currentVoxelIndex * 12 + 11)->v1 = currentVoxelIndex * 8 + 1;
+	pFaces->getElement(currentVoxelIndex * 12 + 11)->v2 = currentVoxelIndex * 8 + 0;
+	pFaces->getElement(currentVoxelIndex * 12 + 11)->v3 = currentVoxelIndex * 8 + 5;
+
+}
+
 OBJGeometryData * Voxelizer::makeCubeGeometryFromVoxels()
 {
 	OBJGeometryData * cubeGeometryData = new OBJGeometryData();
@@ -79,13 +147,13 @@ OBJGeometryData * Voxelizer::makeCubeGeometryFromVoxels()
 				if(voxelGrid->getData()[x][y][z] == true)
 				{
 					voxelCount++;
-                }
-            }
-        }
+				}
+			}
+		}
 	}
-	cubeGeometryData->spatialInformation.verticesCount = voxelCount * 8;        
-	cubeGeometryData->vertices = new OneDimensionalArray<Vertex>(cubeGeometryData->spatialInformation.verticesCount);  
-	cubeGeometryData->spatialInformation.facesCount = voxelCount * 12;      		
+	cubeGeometryData->spatialInformation.verticesCount = voxelCount * 8;
+	cubeGeometryData->vertices = new OneDimensionalArray<Vertex>(cubeGeometryData->spatialInformation.verticesCount);
+	cubeGeometryData->spatialInformation.facesCount = voxelCount * 12;
 	cubeGeometryData->faces = new OneDimensionalArray<Face>(cubeGeometryData->spatialInformation.facesCount);
 	
 	int currentVoxelIndex = 0;
@@ -101,88 +169,9 @@ OBJGeometryData * Voxelizer::makeCubeGeometryFromVoxels()
 				float halfStep = voxelGrid->getDimensions().x.step / 2;
 				if(voxelGrid->getData()[x][y][z] == true)
 				{
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 0)->x = currentXValue - halfStep;     
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 0)->y = currentYValue - halfStep;  
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 0)->z = currentZValue - halfStep;
-
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 1)->x = currentXValue - halfStep;     
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 1)->y = currentYValue - halfStep;  
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 1)->z = currentZValue + halfStep;  
-
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 2)->x = currentXValue - halfStep;     
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 2)->y = currentYValue + halfStep;  
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 2)->z = currentZValue - halfStep;  
-
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 3)->x = currentXValue - halfStep;     
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 3)->y = currentYValue + halfStep;  
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 3)->z = currentZValue + halfStep;
-					                                                                                                  
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 4)->x = currentXValue + halfStep;     
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 4)->y = currentYValue - halfStep;  
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 4)->z = currentZValue - halfStep;
-
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 5)->x = currentXValue + halfStep;     
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 5)->y = currentYValue - halfStep;  
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 5)->z = currentZValue + halfStep;  
-
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 6)->x = currentXValue + halfStep;     
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 6)->y = currentYValue + halfStep;  
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 6)->z = currentZValue - halfStep;  
-
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 7)->x = currentXValue + halfStep;     
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 7)->y = currentYValue + halfStep;  
-					cubeGeometryData->vertices->getElement(currentVoxelIndex * 8 + 7)->z = currentZValue + halfStep;
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 0)->v1 = currentVoxelIndex * 8 + 0; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 0)->v2 = currentVoxelIndex * 8 + 1;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 0)->v3 = currentVoxelIndex * 8 + 2;  
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 1)->v1 = currentVoxelIndex * 8 + 1; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 1)->v2 = currentVoxelIndex * 8 + 3;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 1)->v3 = currentVoxelIndex * 8 + 2;    
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 2)->v1 = currentVoxelIndex * 8 + 1; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 2)->v2 = currentVoxelIndex * 8 + 5;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 2)->v3 = currentVoxelIndex * 8 + 3;    
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 3)->v1 = currentVoxelIndex * 8 + 5; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 3)->v2 = currentVoxelIndex * 8 + 7;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 3)->v3 = currentVoxelIndex * 8 + 3;      
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 4)->v1 = currentVoxelIndex * 8 + 5; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 4)->v2 = currentVoxelIndex * 8 + 4;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 4)->v3 = currentVoxelIndex * 8 + 7;      
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 5)->v1 = currentVoxelIndex * 8 + 4; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 5)->v2 = currentVoxelIndex * 8 + 6;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 5)->v3 = currentVoxelIndex * 8 + 7;       
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 6)->v1 = currentVoxelIndex * 8 + 4; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 6)->v2 = currentVoxelIndex * 8 + 0;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 6)->v3 = currentVoxelIndex * 8 + 6;       
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 7)->v1 = currentVoxelIndex * 8 + 0; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 7)->v2 = currentVoxelIndex * 8 + 2;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 7)->v3 = currentVoxelIndex * 8 + 6;        
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 8)->v1 = currentVoxelIndex * 8 + 2; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 8)->v2 = currentVoxelIndex * 8 + 3;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 8)->v3 = currentVoxelIndex * 8 + 6;        
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 9)->v1 = currentVoxelIndex * 8 + 3; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 9)->v2 = currentVoxelIndex * 8 + 7;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 9)->v3 = currentVoxelIndex * 8 + 6;        
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 10)->v1 = currentVoxelIndex * 8 + 4; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 10)->v2 = currentVoxelIndex * 8 + 5;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 10)->v3 = currentVoxelIndex * 8 + 0;        
-
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 11)->v1 = currentVoxelIndex * 8 + 1; 
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 11)->v2 = currentVoxelIndex * 8 + 0;  
-					cubeGeometryData->faces->getElement(currentVoxelIndex * 12 + 11)->v3 = currentVoxelIndex * 8 + 5;
-					
+					generateCubeFromVoxel(currentVoxelIndex, cubeGeometryData, voxelGrid->getDimensions(), x, y, z);
 					currentVoxelIndex++;
-                }
+				}
 			}
 		}
 	}

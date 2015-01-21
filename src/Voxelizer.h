@@ -20,6 +20,7 @@ public:
 	void randomizeVoxelValues();
 
 	OBJGeometryData * makeCubeGeometryFromVoxels();
+	void generateCubeFromVoxel(int currentVoxelIndex, OBJGeometryData * recipientGeometry, Dimensions gridDimensions, int xIndex, int yIndex, int zIndex);
 
 private:
 
