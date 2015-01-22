@@ -52,11 +52,16 @@ Dimensions Voxelizer::getVoxelGridDimensions()
 
 void Voxelizer::randomizeVoxelValues()
 {
+	processStatus.currentOperationName = "Voxelizing...";
+	processStatus.currentOperationProgress = 0.0f;
+	processStatus.overallProgress = 0.0f;
+	processStatus.status = 0;
+
 	randomize();
-	processStatus.currentOperationName = "test";
-	processStatus.currentOperationProgress = 0.2f;
 	Dimensions dimensions = voxelGrid->getDimensions();
 	bool *** data = voxelGrid->getData();
+	double dblElapsedIterations = 0.0;
+	double dblTotalIterations = (double)(dimensions.x.count) * (double)(dimensions.y.count) * (double)(dimensions.z.count);
 	for(int x = 0; x < dimensions.x.count; ++x)
 	{
 		for(int y = 0; y < dimensions.y.count; ++y)
@@ -64,10 +69,15 @@ void Voxelizer::randomizeVoxelValues()
 			for(int z = 0; z < dimensions.z.count; ++z)
 			{
 				data[x][y][z] = rand() % 2 == 0 ? false : true;
-            }
+				dblElapsedIterations += 1.0;
+				processStatus.currentOperationProgress = (float)(dblElapsedIterations / dblTotalIterations);
+				processStatus.overallProgress = (float)(dblElapsedIterations / dblTotalIterations);
+			}
         }
 	}
-	processStatus.currentOperationName = "test";
+
+	processStatus.currentOperationName = "Done!";
+	processStatus.status = 1;
 }
 
 void Voxelizer::process()

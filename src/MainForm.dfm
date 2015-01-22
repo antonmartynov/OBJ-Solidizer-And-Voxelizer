@@ -6,8 +6,8 @@ object Form1: TForm1
   Caption = 
     'OBJ Solidizer And Voxelizer v0 - https://github.com/antonmartyno' +
     'v/OBJ-Solidizer-And-Voxelizer'
-  ClientHeight = 743
-  ClientWidth = 480
+  ClientHeight = 520
+  ClientWidth = 952
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,7 +23,7 @@ object Form1: TForm1
     Top = 8
     Width = 465
     Height = 169
-    Caption = 'Load an OBJ file'
+    Caption = '01. Load an OBJ file'
     TabOrder = 0
     object LabelInputOBJFile: TLabel
       Left = 16
@@ -79,6 +79,7 @@ object Form1: TForm1
       Top = 136
       Width = 433
       Height = 17
+      Step = 1
       TabOrder = 3
     end
   end
@@ -87,7 +88,7 @@ object Form1: TForm1
     Top = 328
     Width = 465
     Height = 169
-    Caption = 'Re-save the loaded OBJ file'
+    Caption = '03. Re-save the loaded OBJ file'
     TabOrder = 1
     object LabelResavedOBJFile: TLabel
       Left = 16
@@ -135,6 +136,7 @@ object Form1: TForm1
       Top = 80
       Width = 433
       Height = 17
+      Step = 1
       TabOrder = 2
     end
     object ProgressBarResaveFileOverallProgress: TProgressBar
@@ -142,6 +144,7 @@ object Form1: TForm1
       Top = 136
       Width = 433
       Height = 17
+      Step = 1
       TabOrder = 3
     end
   end
@@ -150,7 +153,7 @@ object Form1: TForm1
     Top = 184
     Width = 465
     Height = 137
-    Caption = 'OBJ geometry information'
+    Caption = '02. OBJ geometry information'
     TabOrder = 2
     object LabelOBJInformationAmountOfVertices: TLabel
       Left = 16
@@ -218,11 +221,11 @@ object Form1: TForm1
     end
   end
   object GroupBoxVoxelizationSettings: TGroupBox
-    Left = 8
-    Top = 504
+    Left = 480
+    Top = 8
     Width = 465
     Height = 153
-    Caption = 'Voxelization settings'
+    Caption = '04. Voxelization settings'
     TabOrder = 3
     object LabelGridDimensionsStart: TLabel
       Left = 232
@@ -380,12 +383,28 @@ object Form1: TForm1
     end
   end
   object GroupBoxProcess: TGroupBox
-    Left = 8
-    Top = 664
+    Left = 480
+    Top = 168
     Width = 465
-    Height = 65
-    Caption = 'Process'
+    Height = 169
+    Caption = '05. Process'
     TabOrder = 4
+    object LabelProcessCurrentOperation: TLabel
+      Left = 16
+      Top = 56
+      Width = 433
+      Height = 17
+      AutoSize = False
+      Caption = 'Current operation:'
+    end
+    object LabelProcessOverallProgress: TLabel
+      Left = 16
+      Top = 112
+      Width = 433
+      Height = 17
+      AutoSize = False
+      Caption = 'Overall progress:'
+    end
     object ButtonRandomize: TButton
       Left = 16
       Top = 24
@@ -395,21 +414,104 @@ object Form1: TForm1
       TabOrder = 0
       OnClick = ButtonRandomizeClick
     end
-    object ButtonMakeCubeGeometry: TButton
-      Left = 128
+    object ProgressBarProcessCurrentOperation: TProgressBar
+      Left = 16
+      Top = 80
+      Width = 433
+      Height = 17
+      Step = 1
+      TabOrder = 1
+    end
+    object ProgressBarProcessOverallProgress: TProgressBar
+      Left = 16
+      Top = 136
+      Width = 433
+      Height = 17
+      Step = 1
+      TabOrder = 2
+    end
+  end
+  object GroupBoxOutput: TGroupBox
+    Left = 480
+    Top = 344
+    Width = 465
+    Height = 169
+    Caption = '06. Output'
+    TabOrder = 5
+    object LabelOutputCubesOBJFileFileName: TLabel
+      Left = 16
+      Top = 24
+      Width = 57
+      Height = 17
+      AutoSize = False
+      Caption = 'Filename:'
+    end
+    object LabelOutputCubesOBJFileCurrentOperation: TLabel
+      Left = 16
+      Top = 56
+      Width = 433
+      Height = 17
+      AutoSize = False
+      Caption = 'Current operation:'
+    end
+    object LabelOutputCubesOBJFileOverallProgress: TLabel
+      Left = 16
+      Top = 112
+      Width = 83
+      Height = 13
+      Caption = 'Overall progress:'
+    end
+    object EditOutputCubesOBJFile: TEdit
+      Left = 80
+      Top = 24
+      Width = 265
+      Height = 21
+      TabOrder = 0
+      Text = 'P:\alotofcubes.obj'
+    end
+    object ButtonOutputCubesOBJFile: TButton
+      Left = 352
       Top = 24
       Width = 97
       Height = 25
-      Caption = 'Make cubes'
+      Caption = 'Save cubes here'
       TabOrder = 1
-      OnClick = ButtonMakeCubeGeometryClick
+      OnClick = ButtonOutputCubesOBJFileClick
     end
+    object ProgressBarOutputCubesOBJFileCurrentOperation: TProgressBar
+      Left = 16
+      Top = 80
+      Width = 433
+      Height = 17
+      Step = 1
+      TabOrder = 2
+    end
+    object ProgressBarOutputCubesOBJFileOverallProgress: TProgressBar
+      Left = 16
+      Top = 136
+      Width = 433
+      Height = 17
+      Step = 1
+      TabOrder = 3
+    end
+  end
+  object EditGithubURL: TEdit
+    Left = 8
+    Top = 504
+    Width = 465
+    Height = 17
+    AutoSize = False
+    BorderStyle = bsNone
+    Color = clBtnFace
+    ReadOnly = True
+    TabOrder = 6
+    Text = 'https://github.com/antonmartynov/OBJ-Solidizer-And-Voxelizer'
   end
   object TimerTrackResaveFileOperationStatus: TTimer
     Enabled = False
     Interval = 16
     OnTimer = TimerTrackResaveFileOperationStatusTimer
-    Left = 296
+    Left = 312
     Top = 384
   end
   object TimerTrackLoadFileOperationStatus: TTimer
@@ -418,5 +520,18 @@ object Form1: TForm1
     OnTimer = TimerTrackLoadFileOperationStatusTimer
     Left = 312
     Top = 88
+  end
+  object TimerTrackProgressOperationStatus: TTimer
+    Enabled = False
+    Interval = 16
+    OnTimer = TimerTrackProgressOperationStatusTimer
+    Left = 792
+    Top = 224
+  end
+  object TimerTrackOutputOperationStatus: TTimer
+    Enabled = False
+    Interval = 16
+    Left = 792
+    Top = 400
   end
 end

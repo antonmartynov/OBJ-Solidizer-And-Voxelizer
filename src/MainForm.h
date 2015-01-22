@@ -62,7 +62,21 @@ __published:	// IDE-managed Components
 	TButton *ButtonSetOptimalGrid;
 	TGroupBox *GroupBoxProcess;
 	TButton *ButtonRandomize;
-	TButton *ButtonMakeCubeGeometry;
+	TLabel *LabelProcessCurrentOperation;
+	TProgressBar *ProgressBarProcessCurrentOperation;
+	TLabel *LabelProcessOverallProgress;
+	TProgressBar *ProgressBarProcessOverallProgress;
+	TTimer *TimerTrackProgressOperationStatus;
+	TGroupBox *GroupBoxOutput;
+	TLabel *LabelOutputCubesOBJFileFileName;
+	TEdit *EditOutputCubesOBJFile;
+	TButton *ButtonOutputCubesOBJFile;
+	TLabel *LabelOutputCubesOBJFileCurrentOperation;
+	TProgressBar *ProgressBarOutputCubesOBJFileCurrentOperation;
+	TLabel *LabelOutputCubesOBJFileOverallProgress;
+	TProgressBar *ProgressBarOutputCubesOBJFileOverallProgress;
+	TTimer *TimerTrackOutputOperationStatus;
+	TEdit *EditGithubURL;
 	void __fastcall ButtonLoadFileClick(TObject *Sender);
 	void __fastcall TimerTrackLoadFileOperationStatusTimer(TObject *Sender);
 	void __fastcall TimerTrackResaveFileOperationStatusTimer(TObject *Sender);
@@ -70,7 +84,8 @@ __published:	// IDE-managed Components
 	void __fastcall ButtonInitVoxelizerClick(TObject *Sender);
 	void __fastcall ButtonSetOptimalGridClick(TObject *Sender);
 	void __fastcall ButtonRandomizeClick(TObject *Sender);
-	void __fastcall ButtonMakeCubeGeometryClick(TObject *Sender);
+	void __fastcall TimerTrackProgressOperationStatusTimer(TObject *Sender);
+	void __fastcall ButtonOutputCubesOBJFileClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);

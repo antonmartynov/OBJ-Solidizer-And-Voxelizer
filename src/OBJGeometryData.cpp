@@ -55,8 +55,11 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 		faces = new OneDimensionalArray<Face>(spatialInformation.facesCount);
 
 		loadFileStatus.currentOperationName = "Parsing vertices...";
-		loadFileStatus.currentOperationProgress = 0.0f;
-		loadFileStatus.overallProgress = 0.0f;
+
+		double dblCurrentElapsedIterations = 0.0;
+		double dblCurrentTotalIterations = (double)(spatialInformation.verticesCount);
+		double dblOverallElapsedIterations = 0.0;
+		double dblOverallTotalIterations = (double)(2 * spatialInformation.verticesCount + spatialInformation.facesCount);
 
 		for(size_t s = 0; s < shapes.size(); ++s)
 		{
@@ -76,13 +79,17 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 				vertices->getElement(verticesIndexOffset + v)->z =
 				shapes[s].mesh.positions[v * 3 + 2];
 
-				loadFileStatus.currentOperationProgress += 1.0f / spatialInformation.verticesCount;
-				loadFileStatus.overallProgress += 1.0f / (2 * spatialInformation.verticesCount + spatialInformation.facesCount);
+				dblCurrentElapsedIterations += 1.0;
+				dblOverallElapsedIterations += 1.0;
+				loadFileStatus.currentOperationProgress = (float)(dblCurrentElapsedIterations / dblCurrentTotalIterations);
+				loadFileStatus.overallProgress = (float)(dblOverallElapsedIterations / dblOverallTotalIterations);
 			}
 		}
 
+		dblCurrentElapsedIterations = 0.0;
+		dblCurrentTotalIterations = (double)(spatialInformation.facesCount);
+
 		loadFileStatus.currentOperationName = "Parsing faces...";
-		loadFileStatus.currentOperationProgress = 0.0f;
 
 		for(size_t s = 0; s < shapes.size(); ++s)
 		{
@@ -101,13 +108,17 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 				faces->getElement(facesIndexOffset + i)->v2 = verticesIndexOffset + shapes[s].mesh.indices[i * 3 + 1];
 				faces->getElement(facesIndexOffset + i)->v3 = verticesIndexOffset + shapes[s].mesh.indices[i * 3 + 2];
 
-				loadFileStatus.currentOperationProgress += 1.0f / spatialInformation.facesCount;
-				loadFileStatus.overallProgress += 1.0f / (2 * spatialInformation.verticesCount + spatialInformation.facesCount);
+				dblCurrentElapsedIterations += 1.0;
+				dblOverallElapsedIterations += 1.0;
+				loadFileStatus.currentOperationProgress = (float)(dblCurrentElapsedIterations / dblCurrentTotalIterations);
+				loadFileStatus.overallProgress = (float)(dblOverallElapsedIterations / dblOverallTotalIterations);
 			}
 		}
 
+		dblCurrentElapsedIterations = 0.0;
+		dblCurrentTotalIterations = (double)(spatialInformation.verticesCount);
+
 		loadFileStatus.currentOperationName = "Computing the bounding box...";
-		loadFileStatus.currentOperationProgress = 0.0f;
 
 		spatialInformation.xMin = FLT_MAX;
 		spatialInformation.xMax = FLT_MIN;
@@ -143,8 +154,10 @@ void OBJGeometryData::loadFile(UnicodeString OBJFilename)
 				spatialInformation.zMax = vertices->getElement(v)->z;
 			}
 
-			loadFileStatus.currentOperationProgress += 1.0f / spatialInformation.verticesCount;
-			loadFileStatus.overallProgress += 1.0f / (2 * spatialInformation.verticesCount + spatialInformation.facesCount);
+			dblCurrentElapsedIterations += 1.0;
+			dblOverallElapsedIterations += 1.0;
+			loadFileStatus.currentOperationProgress = (float)(dblCurrentElapsedIterations / dblCurrentTotalIterations);
+			loadFileStatus.overallProgress = (float)(dblOverallElapsedIterations / dblOverallTotalIterations);
         }
 
 		loadFileStatus.currentOperationName = "Done!";
@@ -163,29 +176,40 @@ void OBJGeometryData::saveFile(UnicodeString OBJFilename)
 	// what (and why) can happen if you don't!)
 	setlocale(LC_NUMERIC, "C");
 
+	double dblCurrentElapsedIterations = 0.0;
+	double dblCurrentTotalIterations = (double)(vertices->getCount());
+	double dblOverallElapsedIterations = 0.0;
+	double dblOverallTotalIterations = (double)(vertices->getCount() + faces->getCount());
+
 	saveFileStatus.currentOperationName = "Writing vertices information...";
-	saveFileStatus.currentOperationProgress = 0.0f;
-	saveFileStatus.overallProgress = 0.0f;
 	saveFileStatus.status = 0;
 	for(int v = 0; v < vertices->getCount(); ++v)
 	{
 		outputString = outputString + "v " + UnicodeString(vertices->getElement(v)->x) + " " +
 											 UnicodeString(vertices->getElement(v)->y) + " " +
 											 UnicodeString(vertices->getElement(v)->z) + lineBreak;
-		saveFileStatus.currentOperationProgress += 1.0f / vertices->getCount();
-		saveFileStatus.overallProgress += 1.0f / (vertices->getCount() + faces->getCount());
+
+		dblCurrentElapsedIterations += 1.0;
+		dblOverallElapsedIterations += 1.0;
+		saveFileStatus.currentOperationProgress = (float)(dblCurrentElapsedIterations / dblCurrentTotalIterations);
+		saveFileStatus.overallProgress = (float)(dblOverallElapsedIterations / dblOverallTotalIterations);
 	}
 
+	dblCurrentElapsedIterations = 0.0;
+	dblCurrentTotalIterations = (double)(faces->getCount());
+
 	saveFileStatus.currentOperationName = "Writing indices information...";
-	saveFileStatus.currentOperationProgress = 0.0f;
 	saveFileStatus.status = 0;
 	for(int f = 0; f < faces->getCount(); ++f)
 	{
 		outputString = outputString + "f " + UnicodeString(faces->getElement(f)->v1 + 1) + " " +
 											 UnicodeString(faces->getElement(f)->v2 + 1) + " " +
 											 UnicodeString(faces->getElement(f)->v3 + 1) + lineBreak;
-		saveFileStatus.currentOperationProgress += 1.0f / faces->getCount();
-		saveFileStatus.overallProgress += 1.0f / (vertices->getCount() + faces->getCount());
+
+		dblCurrentElapsedIterations += 1.0;
+		dblOverallElapsedIterations += 1.0;
+		saveFileStatus.currentOperationProgress = (float)(dblCurrentElapsedIterations / dblCurrentTotalIterations);
+		saveFileStatus.overallProgress = (float)(dblOverallElapsedIterations / dblOverallTotalIterations);
 	}
 
 	// Switching back to system default locale for numerals

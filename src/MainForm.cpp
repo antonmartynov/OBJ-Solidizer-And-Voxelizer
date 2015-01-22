@@ -29,9 +29,6 @@ void __fastcall TForm1::ButtonLoadFileClick(TObject *Sender)
 
 void __fastcall TForm1::TimerTrackLoadFileOperationStatusTimer(TObject *Sender)
 {
-	Form1->LabelOpenFileCurrentOperation->Caption = "Current operation: " + engine->geometryData->loadFileStatus.currentOperationName;
-	Form1->ProgressBarOpenFileCurrentOperation->Position = (int)(engine->geometryData->loadFileStatus.currentOperationProgress * 100.0f);
-	Form1->ProgressBarOpenFileOverallProgress->Position = (int)(engine->geometryData->loadFileStatus.overallProgress * 100.0f);
 	if(engine->geometryData->loadFileStatus.status != 0)
 	{
 		Form1->TimerTrackLoadFileOperationStatus->Enabled = false;
@@ -44,6 +41,9 @@ void __fastcall TForm1::TimerTrackLoadFileOperationStatusTimer(TObject *Sender)
 		Form1->LabelOBJInformationZMin->Caption = "Z min: " + UnicodeString(engine->geometryData->spatialInformation.zMin);
 		Form1->LabelOBJInformationZMax->Caption = "Z max: " + UnicodeString(engine->geometryData->spatialInformation.zMax);
 	}
+	Form1->LabelOpenFileCurrentOperation->Caption = "Current operation: " + engine->geometryData->loadFileStatus.currentOperationName;
+	Form1->ProgressBarOpenFileCurrentOperation->Position = (int)(engine->geometryData->loadFileStatus.currentOperationProgress * 100.0f);
+	Form1->ProgressBarOpenFileOverallProgress->Position = (int)(engine->geometryData->loadFileStatus.overallProgress * 100.0f);
 }
 //---------------------------------------------------------------------------
 
@@ -56,13 +56,13 @@ void __fastcall TForm1::ButtonResaveFileClick(TObject *Sender)
 
 void __fastcall TForm1::TimerTrackResaveFileOperationStatusTimer(TObject *Sender)
 {
-	Form1->LabelResaveFileCurrentOperation->Caption = "Current operation: " + engine->geometryData->saveFileStatus.currentOperationName;
-	Form1->ProgressBarResaveFileCurrentOperation->Position = (int)(engine->geometryData->saveFileStatus.currentOperationProgress * 100.0f);
-	Form1->ProgressBarResaveFileOverallProgress->Position = (int)(engine->geometryData->saveFileStatus.overallProgress * 100.0f);
 	if(engine->geometryData->saveFileStatus.status != 0)
 	{
 		Form1->TimerTrackResaveFileOperationStatus->Enabled = false;
 	}
+	Form1->LabelResaveFileCurrentOperation->Caption = "Current operation: " + engine->geometryData->saveFileStatus.currentOperationName;
+	Form1->ProgressBarResaveFileCurrentOperation->Position = (int)(engine->geometryData->saveFileStatus.currentOperationProgress * 100.0f);
+	Form1->ProgressBarResaveFileOverallProgress->Position = (int)(engine->geometryData->saveFileStatus.overallProgress * 100.0f);
 }
 //---------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ void __fastcall TForm1::ButtonInitVoxelizerClick(TObject *Sender)
 
 void __fastcall TForm1::ButtonSetOptimalGridClick(TObject *Sender)
 {
-	engine->voxelizer->initVoxelGrid(engine->voxelizer->computeOptimalGridDimensions(0.3f));
+	engine->createOptimalGrid(0.2f);
 
 	Dimensions optimalDimensions = engine->voxelizer->getVoxelGridDimensions();
 	Form1->LabelGridDimensionsStartX->Caption = UnicodeString(optimalDimensions.x.start);
@@ -95,15 +95,25 @@ void __fastcall TForm1::ButtonSetOptimalGridClick(TObject *Sender)
 void __fastcall TForm1::ButtonRandomizeClick(TObject *Sender)
 {
 	engine->voxelize();
+	Form1->TimerTrackProgressOperationStatus->Enabled = true;
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::ButtonMakeCubeGeometryClick(TObject *Sender)
+void __fastcall TForm1::TimerTrackProgressOperationStatusTimer(TObject *Sender)
 {
-	OBJGeometryData * tempGeometryData = new OBJGeometryData();
-	tempGeometryData->generateFromVoxelGrid(engine->voxelizer->voxelGrid);
-	tempGeometryData->saveFile("P:\\alotofcubes.obj");
+	if(engine->voxelizer->processStatus.status != 0)
+	{
+        Form1->TimerTrackProgressOperationStatus->Enabled = false;
+	}
+	Form1->LabelProcessCurrentOperation->Caption = "Current operation: " + engine->voxelizer->processStatus.currentOperationName;
+	Form1->ProgressBarProcessCurrentOperation->Position = (int)(engine->voxelizer->processStatus.currentOperationProgress * 100.0f);
+	Form1->ProgressBarProcessOverallProgress->Position = (int)(engine->voxelizer->processStatus.overallProgress * 100.0f);
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::ButtonOutputCubesOBJFileClick(TObject *Sender)
+{
+	engine->saveVoxelsAsCubeGeometry(Form1->EditOutputCubesOBJFile->Text);
+}
+//---------------------------------------------------------------------------
 

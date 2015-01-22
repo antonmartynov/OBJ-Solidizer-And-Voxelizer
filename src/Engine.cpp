@@ -51,7 +51,27 @@ void Engine::initVoxelizer()
 	voxelizer->setGeometryData(geometryData);
 }
 
+DWORD WINAPI voxelizeWrapper(LPVOID lpParameter)
+{
+	Voxelizer * pVoxelizer = (Voxelizer *)lpParameter;
+	pVoxelizer->process();
+}
+
 void Engine::voxelize()
 {
-    voxelizer->process();
+	CreateThread(NULL, 0, voxelizeWrapper, (void *)voxelizer, 0, NULL);
+}
+
+void Engine::createOptimalGrid(float desiredStep)
+{
+	voxelizer->initVoxelGrid(voxelizer->computeOptimalGridDimensions(desiredStep));
+}
+
+void Engine::saveVoxelsAsCubeGeometry(UnicodeString filename/*, OperationStatus * progressTracking*/)
+{
+	OBJGeometryData * outputGeometryData = new OBJGeometryData();
+	//progressTracking = &(outputGeometryData->saveFileStatus);
+	outputGeometryData->generateFromVoxelGrid(voxelizer->voxelGrid);
+	outputGeometryData->saveFile(filename);
+	//delete outputGeometryData;
 }

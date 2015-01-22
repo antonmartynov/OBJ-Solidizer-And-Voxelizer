@@ -20,7 +20,11 @@ public:
 
 	void initVoxelizer();
 
+	void createOptimalGrid(float desiredStep);
+
 	void voxelize();
+
+	void saveVoxelsAsCubeGeometry(UnicodeString filename/*, OperationStatus * progressTracking*/);
 };
 
 #endif
