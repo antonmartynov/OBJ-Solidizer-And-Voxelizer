@@ -12,7 +12,8 @@ Engine::~Engine()
 
 void Engine::initialize()
 {
-    geometryData = new OBJGeometryData();
+	geometryData = new OBJGeometryData();
+	voxelizer = new Voxelizer();
 }
 
 DWORD WINAPI loadFileWrapper(LPVOID lpParameter)

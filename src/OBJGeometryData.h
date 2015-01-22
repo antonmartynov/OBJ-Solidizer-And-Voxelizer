@@ -39,9 +39,9 @@ public:
 	OBJInformation spatialInformation;
 
 	void loadFile(UnicodeString OBJFilename);
-	operationStatus loadFileStatus;
+	OperationStatus loadFileStatus;
 	void saveFile(UnicodeString OBJFilename);
-	operationStatus saveFileStatus;
+	OperationStatus saveFileStatus;
 	void generateFromVoxelGrid(VoxelGrid * voxelGrid);
 
 private:

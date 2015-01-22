@@ -53,6 +53,8 @@ Dimensions Voxelizer::getVoxelGridDimensions()
 void Voxelizer::randomizeVoxelValues()
 {
 	randomize();
+	processStatus.currentOperationName = "test";
+	processStatus.currentOperationProgress = 0.2f;
 	Dimensions dimensions = voxelGrid->getDimensions();
 	bool *** data = voxelGrid->getData();
 	for(int x = 0; x < dimensions.x.count; ++x)
@@ -64,7 +66,8 @@ void Voxelizer::randomizeVoxelValues()
 				data[x][y][z] = rand() % 2 == 0 ? false : true;
             }
         }
-    }
+	}
+	processStatus.currentOperationName = "test";
 }
 
 void Voxelizer::process()

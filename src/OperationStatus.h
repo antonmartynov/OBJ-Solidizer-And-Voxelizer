@@ -3,7 +3,7 @@
 
 #include "vcl.h"
 
-struct operationStatus
+struct OperationStatus
 {
 	UnicodeString currentOperationName;
 	float currentOperationProgress;

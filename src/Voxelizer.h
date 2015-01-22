@@ -18,7 +18,7 @@ public:
 	void initVoxelGrid(Dimensions dimensions);
 	Dimensions getVoxelGridDimensions();
 	void process();
-	operationStatus processStatus;
+	OperationStatus processStatus;
 
 //private:
 
