@@ -49,3 +49,8 @@ void Engine::initVoxelizer()
 {
 	voxelizer->setGeometryData(geometryData);
 }
+
+void Engine::voxelize()
+{
+    voxelizer->process();
+}

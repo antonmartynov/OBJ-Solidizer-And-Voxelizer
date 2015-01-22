@@ -94,7 +94,7 @@ void __fastcall TForm1::ButtonSetOptimalGridClick(TObject *Sender)
 
 void __fastcall TForm1::ButtonRandomizeClick(TObject *Sender)
 {
-	engine->voxelizer->randomizeVoxelValues();
+	engine->voxelize();
 }
 //---------------------------------------------------------------------------
 

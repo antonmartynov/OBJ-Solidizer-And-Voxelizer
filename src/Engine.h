@@ -19,6 +19,8 @@ public:
 	void saveFile(UnicodeString filename);
 
 	void initVoxelizer();
+
+	void voxelize();
 };
 
 #endif

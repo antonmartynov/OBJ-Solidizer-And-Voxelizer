@@ -4,6 +4,7 @@
 #include "OBJGeometryData.h"
 #include "VoxelGrid.h"
 #include "math.h"
+#include "OperationStatus.h"
 
 class Voxelizer
 {
@@ -16,13 +17,15 @@ public:
 	Dimensions computeOptimalGridDimensions(float desiredStep);
 	void initVoxelGrid(Dimensions dimensions);
 	Dimensions getVoxelGridDimensions();
-
-	void randomizeVoxelValues();
+	void process();
+	operationStatus processStatus;
 
 //private:
 
 	OBJGeometryData * geometryData;
 	VoxelGrid * voxelGrid;
+
+	void randomizeVoxelValues();
 };
 
 #endif

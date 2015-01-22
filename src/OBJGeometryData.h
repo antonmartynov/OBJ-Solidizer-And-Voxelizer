@@ -8,6 +8,7 @@
 #include "tiny_obj_loader.h"
 #include "float.h"
 #include "VoxelGrid.h"
+#include "OperationStatus.h"
 
 /*
 Issues / TODO:
@@ -15,14 +16,6 @@ Issues / TODO:
 2. I might be better off using smth like std::string instead of UnicodeString
    (not sure, since filenames can be Unicode)
 */
-
-struct operationStatus
-{
-	UnicodeString currentOperationName;
-	float currentOperationProgress;
-	float overallProgress;
-	int status; // 0 - in progress, 1 - finished, 2 - error (currentOperationName has description)
-};
 
 struct OBJInformation
 {

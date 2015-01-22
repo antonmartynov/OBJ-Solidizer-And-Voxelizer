@@ -66,3 +66,8 @@ void Voxelizer::randomizeVoxelValues()
         }
     }
 }
+
+void Voxelizer::process()
+{
+	randomizeVoxelValues();
+}
