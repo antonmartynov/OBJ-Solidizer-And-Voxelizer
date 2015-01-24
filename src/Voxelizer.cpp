@@ -84,3 +84,8 @@ void Voxelizer::process()
 {
 	randomizeVoxelValues();
 }
+
+void Voxelizer::processThread(int threadNumber)
+{
+    //
+}

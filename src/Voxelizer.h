@@ -18,6 +18,7 @@ public:
 	void initVoxelGrid(Dimensions dimensions);
 	Dimensions getVoxelGridDimensions();
 	void process();
+	void processThread(int threadNumber);
 	OperationStatus processStatus;
 
 //private:
@@ -26,6 +27,7 @@ public:
 	VoxelGrid * voxelGrid;
 
 	void randomizeVoxelValues();
+
 };
 
 #endif
